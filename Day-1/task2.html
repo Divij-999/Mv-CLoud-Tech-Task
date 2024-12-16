@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        label{
+            color: #1ABA94;
+            font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+        }
+        td{
+            padding: 11px;
+            padding-bottom: 0px;
+        }
+        input[type=text],input[type=email],input[type=password],input[type=number],select,textarea{
+            width: 100%;
+            padding: 6px;
+        }
+        input[type=range]{
+            width: 100%;
+            height: 10px;
+    
+        }
+        .selectablevalue{
+            font-family: Arial, Helvetica, sans-serif;
+            color: rgb(120, 118, 118);
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body style="display: flex;justify-content: center;">
+    <form action="" method="post" style="border: 12px solid #547C8E;width:fit-content;">
+        <h1 style="background-color: #EEF0F2;margin: 0;justify-content: center;display: flex;color:#646666;padding: 10px;font-family: Arial, Helvetica, sans-serif;border-bottom:1px solid grey">Create Account</h1>
+        <!-- <div style="background-color: lightgrey;width: 100%;">
+        </div> -->
+        <table style="padding: 20px;width: fit-content;">
+            <tr>
+                <td>
+                    <label for="firstnamelabel">First name*</label><br>
+                    <input type="text" placeholder="enter your first name">
+                </td>
+                <td>
+                    <label for="lastnamelabel">Last name</label><br>
+                    <input type="text" placeholder="enter your last name">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label for="emaillabel">Email*</label><br>
+                    <input type="email" placeholder="enter your email">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="passwordlabel">Password*</label><br>
+                    <input type="password" placeholder="enter your password"/>
+                </td>
+                <td>
+                    <label for="confirmpasswordlabel">Confirm Password*</label><br>
+                    <input type="password" placeholder="enter your password again"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="genderlabel">Gender:</label><br>
+                    <input type="radio" name="male" class="gender"><span class="selectablevalue">Male</span>  
+                    <input type="radio" name="female" class="gender"><span class="selectablevalue">Female</span>  
+                </td>
+                <td>
+                    <label for="Hobbieslabel">Hobbies</label><br>
+                    <input type="checkbox" name="music"><span class="selectablevalue">Music</span> 
+                    <input type="checkbox" name="sport"><span class="selectablevalue">Sports</span> 
+                    <input type="checkbox" name="travel"><span class="selectablevalue">Travel</span> 
+                    <input type="checkbox" name="movie"><span class="selectablevalue">Movies</span> 
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="sourceofincomelabel">Source of Income</label><br>
+                    <!-- <input type="password" placeholder="enter your password again"/> -->
+                    <select name="sourceofincome" id="souceofincome">
+                        <option value="employed" selected>Employed</option>
+                        <option value="not employed">Not Employed</option>
+                     </select>
+                </td>
+                <td>
+                    <label for="incomelabel">Income</label><br>
+                    <div style="display: flex;align-items: end;">
+                        <input type="range" name="income" min="1" max="100" value="20" id="income"><span id="incomerange" style="background-color: #1ABB95;color:white;padding:2px;border-radius: 3px;font-family: Arial, Helvetica, sans-serif;font-weight: 300;padding: 3px;">20K</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="profile">Upload Profile Picture</label><br>
+                    <input type="file" name="profile" id="profile">
+
+                </td>
+                <td>
+                    <label for="age">Age</label><br>
+                    <input type="number" name="age" id="age" value="18">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <label for="bio">Bio</label><br>
+                    <textarea name="bio" id="bio" rows="4"></textarea>
+                </td>
+            </tr>
+        </table>
+        <div style="background-color: #EEF0F2;margin: 0;justify-content: end;display: flex;padding:10px;padding-right: 15px;border-top:1px solid grey">
+            <button type="submit" style="background-color: #1ABB95;color:white;padding:7px;font-weight: bold;border-radius: 3px;border-width: 0px;font-size: 17px;">Create</button>
+        </div>
+    </form>
+    
+    <script>
+        document.getElementById('income').oninput = function(e){
+            document.getElementById('incomerange').innerHTML = e.target.value+'K'
+        }
+    </script>
+</body>
+</html>

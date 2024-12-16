@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            border-spacing: 0px;
+        }
+        td,th{
+            border: 1px solid black;
+            padding: 14px;
+            width: 100px;
+        }
+        span{
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body style="display: flex;justify-content: center;">
+    <table border="4px solid black">
+        <caption>
+            <h1>
+                TIME TABLE
+            </h1>
+        </caption>
+        <tr align='center'>
+            <th>Day/Period</th>
+            <th>
+                <div>I</div>
+                <div>9:30-10:20</div>
+            </th>
+            <th>
+                <div>II</div>
+                <div>10:20-11:10</div>
+            </th>
+            <th>
+                <div>III</div>
+                <div>11:10-12:00</div>
+            </th>
+            <th>
+                <div>12:00-12:40</div>
+            </th>
+            <th>
+                <div>IV</div>
+                <div>12:30-1:30</div>
+            </th>
+            <th>
+                <div>V</div>
+                <div>1:30-2:20</div>
+            </th>
+            <th>
+                <div>VI</div>
+                <div>2:20-3:10</div>
+            </th>
+            <th>
+                <div>VII</div>
+                <div>3:10-4:00</div>
+            </th>
+        </tr>
+        <tr align='center'>
+            <th>Monday</th>
+            <td>Eng</td>
+            <td>Math</td>
+            <td>Che</td>
+            <td rowspan="6" >
+                <div style="display: flex;flex-direction: column;">
+                    <span>L</span>
+                    <span>U</span>
+                    <span>N</span>
+                    <span>C</span>
+                    <span>H</span>
+                </div>
+            </td>
+            <td colspan="3">LAB</td>
+            <td>Phy</td>
+        </tr>
+        <tr align='center'>
+            <th>Tuesday</th>
+            <td colspan="3">LAB</td>
+            <td>Eng</td>
+            <td>Che</td>
+            <td>Math</td>
+            <td>SPORTS</td>
+        </tr>
+        <tr align='center'>
+            <th>Wednesday</th>
+            <td>Math</td>
+            <td>Phy</td>
+            <td>Eng</td>
+            <td>Che</td>
+            <td colspan="3">LIBRARY</td>
+        </tr>
+        <tr align='center'>
+            <th>Thursday</th>
+            <td>Phy</td>
+            <td>Eng</td>
+            <td>Che</td>
+            <td colspan="3">LAB</td>
+            <td>Math</td>
+        </tr>
+        <tr align='center'>
+            <th>Friday</th>
+            <td colspan="3">LAB</td>
+            <td>Math</td>
+            <td>Che</td>
+            <td>Eng</td>
+            <td>Phy</td>
+        </tr>
+        <tr align='center'>
+            <th>Saturday</th>
+            <td>Eng</td>
+            <td>Che</td>
+            <td>Math</td>
+            <td colspan="3">SEMINAR</td>
+            <td>SPORTS</td>
+        </tr>
+    </table>
+</body>
+</html>

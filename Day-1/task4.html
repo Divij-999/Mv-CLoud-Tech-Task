@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            border-spacing: 0px;
+        }
+        td{
+            border: 2px solid black;
+            padding: 12px;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div style="height: 90vh;width: 90vw;display: flex;justify-content: center;align-items: center;">
+        <table style="height: 50%;width: 50%; border: 2px solid black;">
+            <tr style="height: 16.7%;">
+                <td style="width: 34%;"></td>
+                <td colspan="2"></td>
+                <!-- <td></td> -->
+            </tr>
+            <!-- <tr></tr> -->
+            <tr style="height: 33.33%;">
+                <td rowspan="2" colspan="2" style="width: 66%;"></td>
+                <td rowspan="2"></td>
+                <!-- <td></td> -->
+            </tr>
+            <tr>
+            </tr>
+            <tr style="height: 33.33%;">
+                <td rowspan="2"></td>
+                <td rowspan="2" colspan="2"></td>
+            </tr>
+            <tr>
+            </tr>
+            <tr style="height: 16.7%;">
+                <td colspan="3"></td>
+                <!-- <td></td>
+                <td></td> -->
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
