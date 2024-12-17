@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="post">
+        <!-- <legend></legend>   -->
+        <fieldset style="width: fit-content;">
+            <table>
+                <tr>
+                    <td>
+                        <label for="username">Username : </label>
+                    </td>
+                    <td>
+                        <input type="text" id="username">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="password">Password : </label>
+                    </td>
+                    <td>
+                        <input type="password" id="password"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="Gender">Gender:</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="male" id="gender" value="male"> Male
+                        <input type="radio" name="male" id="gender" value="female"> Female
+                    </td>
+                </tr>
+            </table>
+            <label for="dropdown">Dropdown Menu: </label>
+            <select name="dropdown" id="dropdown">
+                <option value="select" disabled selected>--Select--</option>
+                <option value="drop1">Drop 1</option>
+                <option value="drop2">Drop 2</option>
+            </select>
+            <br>
+            <input type="submit" value="submit" id="submit">
+        </fieldset>  
+    </form>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+        import { getDatabase , set ,ref } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDOvgtXjrTO-6_dXLncmI9yvM6PFMW61ls",
+            authDomain: "mvclouds-97c92.firebaseapp.com",
+            projectId: "mvclouds-97c92",
+            storageBucket: "mvclouds-97c92.firebasestorage.app",
+            messagingSenderId: "191632869466",
+            appId: "1:191632869466:web:8dd05acd321aaaa3937063"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app)
+
+        document.getElementById('submit').addEventListener('click',function(e){
+            e.preventDefault()
+            console.log(document.getElementById('username').value);
+            console.log(document.getElementById('password').value);
+            console.log(document.getElementById('gender').value);
+            console.log(document.getElementById('dropdown').value);
+            
+            
+            
+            set(ref(db,'user/'+document.getElementById('username').value),{
+                username : document.getElementById('username').value,
+                password : document.getElementById('password').value,
+                gender : document.getElementById('gender').value,
+                dropdown : document.getElementById('dropdown').value
+                
+            });
+            alert('Login Success')
+        })
+      </script>
+</body>
+</html>

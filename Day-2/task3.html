@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @keyframes ball {
+            0%{
+                left:0% ;
+                top : 0%;
+                background-color: red;
+            }
+            25%{
+                left:80% ;
+                top : 0px;
+                background-color: yellow;
+            }
+            
+            50%{
+                
+                left:80% ;
+                top : 80%;
+                background-color: green;
+            }
+            75%{
+                left:0% ;
+                top : 80%;
+                background-color: pink;
+            }
+            100%{
+                
+                left:0% ;
+                top : 0%;
+                background-color: pink;
+            }
+        }
+        @keyframes ballBounce {
+            0%{
+                top:0%
+            }
+            50%{
+                top:80%;
+            }
+            100%{
+                top: 0%;
+            }
+        }
+        @keyframes changeShape {
+            0%{
+                clip-path: circle(50% at 50% 50%);
+            }
+            100%{
+                clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%);
+            }
+        }
+        #ball{
+            position: relative;
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            background-color: black;
+            animation-name: none;
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+            animation-direction:alternate;
+        }
+    </style>
+</head>
+<body>
+    <div style="height: 90vh;width: 90vw;display: flex;justify-content: center;align-items: center;">
+        <table style="width: 90%;height: 100%;">
+            <tr style="height: 40%;width: 100%;">
+                <td>
+                    <h1>Select Animation</h1>
+                    <button onclick="getAnimation('square')">Create Square</button>
+                    <button onclick="getAnimation('bounce')">Ball Bounce</button>
+                    <button onclick="getAnimation('shapes')">Change Shape</button>
+                </td>
+                
+
+            </tr>
+            <tr>
+                <td style="padding-left: 30px;">
+                    <div id="ball"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+    <script>
+        function getAnimation(value){
+            if(value=='bounce'){
+                document.getElementById('ball').style.animationName = 'ballBounce'
+            }
+            else if(value=='square'){
+                document.getElementById('ball').style.animationName = 'ball'
+            }
+            else if(value=='shapes'){
+                document.getElementById('ball').style.animationName = 'changeShape'
+                document.getElementById('ball').style.animationDirection = 'normal'          
+                document.getElementById('ball').style.animationDuration = '3s'          
+
+            }
+        }
+    </script>
+</body>
+</html>

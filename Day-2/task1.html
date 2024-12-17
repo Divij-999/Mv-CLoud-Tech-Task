@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tear {
+            display: flex;
+            height: 18px;
+            width: 18px;
+            padding: 5px;
+            border-radius: 150px 151px 155px 10px;
+            -webkit-border-radius: 150px 151px 155px 10px;
+            -moz-border-radius: 150px 151px 155px 10px;
+            justify-content: center;
+            align-items: center;
+            }
+        input[type=text],input[type=email],textarea{
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 6px;
+            background-color: #F5F7F8;
+            /* border: '0px solid grey'; */
+            border: none;
+            border-radius: 3px;
+            font-family: Arial, Helvetica, sans-serif;
+
+        }
+    </style>
+</head>
+<body>
+    <div style="height: 90vh;width: 90vw;display: flex;justify-content: center;align-items: center;">
+        <form style="height:81% ;width: 70%;background-color: #E8EEEF;border-radius: 10px;padding: 20px;">
+            <div id="candiateInfoTitle" style="display: flex;">
+                <span style="background-color: #186EBC;" class="tear">
+                    <span style="color: white; font-weight: bold;">1</span>
+                </span>
+                <span><h2 style="margin: 0;margin-left: 10px;">Candidate Info</h2></span>
+            </div>
+            <div id="candidateInfoField" style="margin-top: 20px;">
+                <table style="width: 100%;">
+                    <tr>
+                        <td>
+                            <input type="text" placeholder="Your Name*" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="email" placeholder="Your Email*" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <textarea name="" id="about" placeholder="About yourself"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="font-weight:bold; margin-bottom: 8px;">
+                                <label for="Interest" >
+                                    Interests:
+                                </label>
+                            </div>
+                            <div>
+                                <input type="text" placeholder="Fishkeeping">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="additionalInfo" style="display: flex;margin-top: 15px;">
+                <span style="background-color: #186EBC;" class="tear">
+                    <span style="color: white; font-weight: bold;">2</span>
+                </span>
+                <span><h2 style="margin: 0;margin-left: 10px;">Additional Info</h2></span>
+            </div>
+            <div id="additionalInfoField" style="margin-top: 20px;">
+                <table style="width: 100%;">
+                    <tr>
+                        <td>
+                            <textarea name="" id="aboutSchool" placeholder="About Your School"></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div style="margin-top: 21px;width: 100%;">
+                <button type="submit"  style="width: 100%;border: none;background-color: #186EBC;color: white;padding: 15px;">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

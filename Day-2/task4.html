@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input[type=text],input[type=email],textarea,input[type=password]{
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 6px;
+            background-color: #F5F7F8;
+            /* border: '0px solid grey'; */
+            border: none;
+            border-radius: 3px;
+            font-family: Arial, Helvetica, sans-serif;
+
+        }
+        #mediaQueryForm{
+            height:64% ;width: 50%;
+        }
+        @media screen and (orientation:portrait) {
+        
+            #mediaQueryForm{
+                margin-left: 10vw;
+                height:64% ;width: 90%;
+            }      
+        }
+    </style>
+</head>
+<body>
+    <div style="height: 90vh;width: 90vw;display: flex;justify-content: center;align-items: center;flex-direction: column;">
+        <form style="height:64% ;width: 70%;background-color: #E8EEEF;border-radius: 10px;padding: 20px;">
+            <div id="candidateInfoField" style="margin-top: 20px;">
+                <table style="width: 100%;">
+                    <caption>
+                        <h1>Form</h1>
+                    </caption>
+                    <tr>
+                        <td>
+                            <input type="text" placeholder="Your Name*" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="password" placeholder="Your Password*" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="email" placeholder="Your Email*" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <textarea name="" id="about" placeholder="About yourself"></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+             <div style="margin-top: 21px;width: 100%;">
+                 <button type="submit"  style="width: 100%;border: none;background-color: #186EBC;color: white;padding: 15px;">Submit</button>
+            </div>
+        </form>
+        <h1>Form made responsive without media query using % units</h1>
+    </div>
+    <div style="height: 90vh;width: 90vw;display: flex;justify-content: center;align-items: center;flex-direction: column;">
+        <form style="background-color: #E8EEEF;border-radius: 10px;padding: 20px;"  id="mediaQueryForm">
+            <div style="margin-top: 20px;">
+                <table style="width: 100%;">
+                    <caption>
+                        <h1>Form</h1>
+                    </caption>
+                    <tr>
+                        <td>
+                            <input type="text" placeholder="Your Name*" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="password" placeholder="Your Password*" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="email" placeholder="Your Email*" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <textarea name="" id="about" placeholder="About yourself"></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+             <div style="margin-top: 21px;width: 100%;">
+                 <button type="submit"  style="width: 100%;border: none;background-color: #186EBC;color: white;padding: 15px;">Submit</button>
+            </div>
+        </form>
+        <h1>Form made responsive with media query</h1>
+    </div>
+</body>
+</html>
