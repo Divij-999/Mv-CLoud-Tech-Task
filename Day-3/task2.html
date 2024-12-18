@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function getLength(){
+            num = document.getElementById('number').value
+                    
+            console.log(`Number of digits of given number '${num}' -> ${num.length}`);
+            alert(`Number of digits of given number '${num}' -> ${num.length}`)
+            document.getElementById('message').innerHTML = `Number of digits of given number '${num}' -> ${num.length}`
+        }
+    </script>
+</head>
+<body>
+        <h1>Task 2</h1>
+        <h3>Enter number to get number of digits</h3>
+        <input type="num" placeholder="Enter num " id="number">
+        <input type="submit" value="submit" onclick="getLength()">
+        <p id="message"></p>
+</body>
+</html>

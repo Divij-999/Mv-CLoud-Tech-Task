@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    
+    <style>
+        #calculatorOuterBox {
+            width: 80%;
+            height: 90%;
+            background-color: black;
+            border-radius: 30px;
+            box-shadow: 10px 10px 15px grey;
+            max-width: 600px;
+            max-height: 700px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+        .row {
+            color: white;
+            border: 1px solid black;
+            width: 100%;
+            flex-grow: 1;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .col {
+            font-size: 27px;
+            padding: 27px;
+            display: flex;
+            justify-content: center;
+            border: 1px solid white;
+            box-shadow: 2px 2px 1px grey;
+            border-radius: 12px;
+            font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .col:hover {
+            background-color: grey;
+            cursor: pointer;
+        }
+        .col:active {
+            background-color: lightgrey;
+        }
+    </style>
+</head>
+<body>
+    <div style="height: 97vh; width: 97vw; display: flex; justify-content: center; align-items: center;">
+        <div id="calculatorOuterBox">
+            <div class="row">
+                <span id="displayBox" style="width: 100%; text-align: right; padding: 20px; background-color: grey; border-radius: 12px;">0</span>
+            </div>
+            <div class="row">
+                <span class="col" onclick="clearDisplay()" style="width: 26%;">AC</span>
+                <span class="col" onclick="appendToDisplay('%')">%</span>
+                <span class="col" onclick="appendToDisplay('/')">/</span>
+            </div>
+            <div class="row">
+                <span class="col" onclick="appendToDisplay('7')">7</span>
+                <span class="col" onclick="appendToDisplay('8')">8</span>
+                <span class="col" onclick="appendToDisplay('9')">9</span>
+                <span class="col" onclick="appendToDisplay('*')">X</span>
+            </div>
+            <div class="row">
+                <span class="col" onclick="appendToDisplay('4')">4</span>
+                <span class="col" onclick="appendToDisplay('5')">5</span>
+                <span class="col" onclick="appendToDisplay('6')">6</span>
+                <span class="col" onclick="appendToDisplay('-')">-</span>
+            </div>
+            <div class="row">
+                <span class="col" onclick="appendToDisplay('1')">1</span>
+                <span class="col" onclick="appendToDisplay('2')">2</span>
+                <span class="col" onclick="appendToDisplay('3')">3</span>
+                <span class="col" onclick="appendToDisplay('+')">+</span>
+            </div>
+            <div class="row">
+                <span class="col" onclick="appendToDisplay('0')" style="width: 26%;">0</span>
+                <span class="col" onclick="appendToDisplay('.')">.</span>
+                <span class="col" onclick="calculateResult()">=</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        function clearDisplay() {
+            document.getElementById('displayBox').innerText = '0';
+        }
+
+        function appendToDisplay(value) {
+            const display = document.getElementById('displayBox');
+            if (display.innerText === '0') {
+                display.innerText = value;
+            } else {
+                display.innerText += value;
+            }
+        }
+
+        function calculateResult() {
+            const display = document.getElementById('displayBox');
+            // try {
+            //     const result = eval(display.innerText.replace('X', '*'));
+            //     display.innerText = result;
+            // } catch {
+            //     display.innerText = 'Error';
+            // }
+            value = display.innerHTML.split('')
+            for(let i=0 ; i<value.length ; i++){
+                console.log(value[i]+" "+value[i+2]);
+                
+                if((value[i]>='0' && value[i]<='9')&&(value[i+2]>='0' && value[i+2]<='9')){
+                    console.log(parseFloat(value[i])+value[i+1]+parseFloat(value[i+2]));
+                    opt = value[i+1]
+                    switch (opt) {
+                        case '+':{
+                            display.innerHTML = (parseFloat(value[i])+parseFloat(value[i+2]))
+                            break;
+                        }
+                        case '-':{
+                            display.innerHTML = (parseFloat(value[i])-parseFloat(value[i+2]))
+
+                        break;
+                        }
+                        case '*':{
+                            
+                            display.innerHTML = (parseFloat(value[i])*parseFloat(value[i+2]))
+                            break;
+                        }
+                        case '%':{
+                            display.innerHTML = (parseFloat(value[i])%parseFloat(value[i+2]))
+                            break;
+                        }
+                        case '/':{
+                            display.innerHTML = (parseFloat(value[i])/parseFloat(value[i+2]))
+                            break;
+                        }
+                        default:{
+                            
+                            display.innerHTML = 'Error'
+                            break;
+                        }
+                    }
+                    i+=2
+                }
+                else{
+                    
+                    display.innerHTML = 'Error'
+                    console.log('error');
+                    
+                }
+            }
+        }
+    </script>
+</body>
+</html>

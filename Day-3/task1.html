@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        
+        function test(){
+            var num = document.getElementById('number').value
+            value = num+" "+"something"
+            alert(`New String ${value}`)
+            document.getElementById('message').innerHTML = `New String ${value}`
+        }
+    </script>
+</head>
+<body>
+    <h1>Task 1</h1>
+    <h3>Enter string</h3>
+    <input type="num1" placeholder="Enter num " id="number">
+    <input type="submit" value="submit" onclick="test()">
+    <p id="message"></p>
+</body>
+</html>

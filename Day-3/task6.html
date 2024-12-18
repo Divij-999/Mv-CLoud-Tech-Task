@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function getValue(){
+            num1 = document.getElementById('number1').value
+            num2 = document.getElementById('number2').value
+            
+            value = Math.floor(num1/(2**num2))
+            alert(`Value for ${num1}>>${num2} = ${value}`)
+            document.getElementById('message').innerHTML = `Value for ${num1}>>${num2} = ${value}`
+            
+        }
+    </script>
+</head>
+<body>
+        <h1>Task 6</h1>
+        <h3>Enter number for right shift</h3>
+        <input type="num" placeholder="Enter num 1 " id="number1">
+        <input type="num" placeholder="Enter num 2 " id="number2">
+        <input type="submit" value="submit" onclick="getValue()">
+        <p id="message"></p>
+</body>
+</html>

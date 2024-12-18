@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function multiplyTable(){
+            num = document.getElementById('number').value
+             
+            table = ''
+            for(let x = 1 ; x<=10 ; x++){
+                console.log(`${num} * ${x} = ${num*x}`);
+                table += (`${num} * ${x} = ${num*x}</br>`)
+            }
+            document.getElementById('message').innerHTML = table
+        }
+    </script>
+</head>
+<body>
+        <h1>Task 4</h1>
+        <h3>Enter value to get multiplication table</h3>
+        <input type="num" placeholder="Enter num " id="number">
+        <input type="submit" value="submit" onclick="multiplyTable()">
+        <p id="message"></p>
+</body>
+</html>

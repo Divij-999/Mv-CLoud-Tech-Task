@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function test(){
+            var num = parseInt(document.getElementById('number').value)
+            list = []
+
+            for(let i = 1 ; i<=num ; i++){
+                if(num%i==0){
+                    list.push(i)
+                }
+            }
+            console.log(list);
+            alert(`New list ${list}`)
+            document.getElementById('message').innerHTML = `New list ${list}`
+
+        }
+    </script>
+</head>
+<body>
+        <h1>Task 12</h1>
+        <h3>Enter number</h3>
+        <input type="num1" placeholder="Enter num " id="number">
+        <input type="submit" value="submit" onclick="test()">
+        <p id="message"></p>
+</body>
+</html>

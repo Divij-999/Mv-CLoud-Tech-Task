@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function removeLeadingTrailing(){
+            num = document.getElementById('number').value
+            // console.log(num);
+            alert(`${num} after removing leading and trailing zero => ${parseFloat(num)}`)
+            document.getElementById('message').innerHTML = `${num} after removing leading and trailing zero => ${parseFloat(num)}`
+            
+            
+        }
+    </script>
+</head>
+<body>
+        <h1>Task 7</h1>
+        <h3>Enter number to remove heading and trailing zeros</h3>
+        <input type="num" placeholder="Enter num " id="number">
+        <input type="submit" value="submit" onclick="removeLeadingTrailing()">
+        <p id="message"></p>
+</body>
+</html>

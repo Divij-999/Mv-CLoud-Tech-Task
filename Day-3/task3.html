@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function checkSubstring(){
+            e = document.getElementById('string').value
+            value = (e.includes('ee') ? true : false)
+            console.log(value);
+            alert(value)
+                if(value){
+                    document.getElementById('message').innerHTML = `The string ${e} contains substring ee`
+            }
+            else{
+                document.getElementById('message').innerHTML = `The string ${e} don't contain substring ee`
+            }
+        }
+    </script>
+</head>
+<body>
+    
+        <h1>Task 3</h1>
+        <h3>Enter a string to check if it contains substring ee</h3>
+        <input type="text" placeholder="Enter string " id="string">
+        <input type="submit" value="submit" onclick="checkSubstring()">
+        <p id="message"></p>
+</body>
+</html>
