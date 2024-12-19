@@ -71,7 +71,7 @@
                 <span class="col" onclick="appendToDisplay('4')">4</span>
                 <span class="col" onclick="appendToDisplay('5')">5</span>
                 <span class="col" onclick="appendToDisplay('6')">6</span>
-                <span class="col" onclick="appendToDisplay('-')">-</span>
+                <span class="col" onclick="appendToDisplay('~')">-</span>
             </div>
             <div class="row">
                 <span class="col" onclick="appendToDisplay('1')">1</span>
@@ -107,52 +107,105 @@
             //     display.innerText = result;
             // } catch {
             //     display.innerText = 'Error';
-            // }
-            value = display.innerHTML.split('')
-            for(let i=0 ; i<value.length ; i++){
-                console.log(value[i]+" "+value[i+2]);
-                
-                if((value[i]>='0' && value[i]<='9')&&(value[i+2]>='0' && value[i+2]<='9')){
-                    console.log(parseFloat(value[i])+value[i+1]+parseFloat(value[i+2]));
-                    opt = value[i+1]
-                    switch (opt) {
-                        case '+':{
-                            display.innerHTML = (parseFloat(value[i])+parseFloat(value[i+2]))
-                            break;
-                        }
-                        case '-':{
-                            display.innerHTML = (parseFloat(value[i])-parseFloat(value[i+2]))
+            // }// Example string in display.innerHTML
+            let expression = display.innerHTML; // Assuming this contains your expression
+            let operators = /[+~*/%]/; // Regex to match any of the operators
 
-                        break;
-                        }
-                        case '*':{
-                            
-                            display.innerHTML = (parseFloat(value[i])*parseFloat(value[i+2]))
+            // Split the expression into operands
+            let operands = expression.split(operators);
+
+            // Split the expression to get the operators as well
+            let operatorsFound = expression.match(operators) || [];
+
+            // Log the results
+            console.log("Operands:", operands);
+            console.log("Operators:", operatorsFound);
+
+            // value = display.innerHTML.split('');
+            for (let i = 0,j=0; i < operands.length; i+=2,j++) {
+                if (i + 1 >= operands.length) {
+                    display.innerHTML = 'Error';
+                    console.log('errori');
+                    break;
+                }
+                console.log(operands[i]+" " +operands[i+1]+" "+operatorsFound[j]+" "+j);
+                
+                if(operands[i]&&operands[i+1]&&operatorsFound[j]){
+                    let num1 = parseFloat(operands[i]);
+                    let num2 = parseFloat(operands[i + 1]);
+                    let opt = operatorsFound[j]
+                    console.log(opt);
+                    
+
+                    switch (opt) {
+                        case '+':
+                            display.innerHTML = num1 + num2;
                             break;
-                        }
-                        case '%':{
-                            display.innerHTML = (parseFloat(value[i])%parseFloat(value[i+2]))
+                        case '~':
+                            display.innerHTML = num1 - num2;
                             break;
-                        }
-                        case '/':{
-                            display.innerHTML = (parseFloat(value[i])/parseFloat(value[i+2]))
+                        case '*':
+                            display.innerHTML = num1 * num2;
                             break;
-                        }
-                        default:{
-                            
-                            display.innerHTML = 'Error'
+                        case '%':
+                            display.innerHTML = num1 % num2;
                             break;
-                        }
+                        case '/':
+                            if (num2 !== 0) {
+                                display.innerHTML = num1 / num2;
+                            } else {
+                                display.innerHTML = 'Error: Division by zero';
+                            }
+                            break;
+                        default:
+                            display.innerHTML = 'Error';
+                            break;                   
                     }
-                    i+=2
                 }
-                else{
-                    
-                    display.innerHTML = 'Error'
+                else {
+                    display.innerHTML = 'Error';
                     console.log('error');
-                    
+                    break;
                 }
+            // Check if we have enough characters left to process
+
+            //     console.log(value[i] + " " + value[i + 2]);
+
+            //     if ((value[i] >= '0' && value[i] <= '9') && (value[i + 2] >= '0' && value[i + 2] <= '9')) {
+            //         let opt = value[i + 1];
+
+            //         switch (opt) {
+            //             case '+':
+            //                 display.innerHTML = num1 + num2;
+            //                 break;
+            //             case '-':
+            //                 display.innerHTML = num1 - num2;
+            //                 break;
+            //             case '*':
+            //                 display.innerHTML = num1 * num2;
+            //                 break;
+            //             case '%':
+            //                 display.innerHTML = num1 % num2;
+            //                 break;
+            //             case '/':
+            //                 if (num2 !== 0) {
+            //                     display.innerHTML = num1 / num2;
+            //                 } else {
+            //                     display.innerHTML = 'Error: Division by zero';
+            //                 }
+            //                 break;
+            //             default:
+            //                 display.innerHTML = 'Error';
+            //                 break;
+            //         }
+            //         i += 2; // Move past the processed numbers and operator
+            //     } else {
+            //         display.innerHTML = 'Error';
+            //         console.log('error');
+            //         break;
+            //     }
             }
+
         }
     </script>
 </body>
