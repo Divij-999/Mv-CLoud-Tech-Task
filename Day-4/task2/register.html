@@ -145,32 +145,40 @@
             console.log(document.getElementById('email').value);
             console.log(document.getElementById('password').value);
             
-            
-            
-            get(child(dbref,'user2/'+document.getElementById('username').value)).then((snapshot)=>{
-                if(snapshot.exists()){
-                    
-                    setTimeout(()=>{
-                        alert('Already Registered')
-                        window.location.href = 'login.html'
-                    },2000)
-                }
-                else{
-                    set(ref(db,'user2/'+document.getElementById('username').value),{
-                        firstname : document.getElementById('firstname').value,
-                        lastname : document.getElementById('lastname').value,
-                        username : document.getElementById('username').value,
-                        email : document.getElementById('email').value,
-                        password : document.getElementById('password').value
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+            // Validate inputs
+            if (!emailRegex.test(document.getElementById('email').value)) {
+                alert('Invalid Email');
+            } else if (!passwordRegex.test(document.getElementById('password').value)) {
+                alert('Invalid Password');
+            } else {
+                get(child(dbref,'user2/'+document.getElementById('username').value)).then((snapshot)=>{
+                    if(snapshot.exists()){
                         
-                    });
+                        setTimeout(()=>{
+                            alert('Already Registered')
+                            window.location.href = 'login.html'
+                        },2000)
+                    }
+                    else{
+                        set(ref(db,'user2/'+document.getElementById('username').value),{
+                            firstname : document.getElementById('firstname').value,
+                            lastname : document.getElementById('lastname').value,
+                            username : document.getElementById('username').value,
+                            email : document.getElementById('email').value,
+                            password : document.getElementById('password').value
+                            
+                        });
+                        
+                        setTimeout(()=>{
+                            alert('Login Success')
+                            window.location.href = 'confirm.html'
+                        },2000)
                     
-                    setTimeout(()=>{
-                        alert('Login Success')
-                        window.location.href = 'confirm.html'
-                    },2000)
-                
-            }})
+                }})
+            }
         })
       </script>
 </body>
