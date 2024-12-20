@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function sort(){
+            id = document.getElementById('numberInput').value.split('')
+            console.log(id);
+
+            for(let i =0 ; i<id.length ; i++){
+                for(let j=0 ; j<i ; j++){
+                    if(id[i]<id[j]){
+                        temp = id[i]
+                        id[i] = id[j]
+                        id[j] = temp
+                    }
+                }
+            }
+            console.log(id);
+
+            newValue = ''
+            for(let i =0 ; i<id.length ; i++){
+                console.log((id[i])+" "+(parseInt(id[i])+1)+" "+parseInt(id[i+1]));
+                
+                if(parseInt(id[i])+1 != parseInt(id[i+1])){
+                    newValue += (id[i]+" ")
+                }
+                else{
+                    newValue += id[i]
+                }
+            }
+
+            console.log(newValue);
+            
+            
+            
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="numberInput">
+    <input type="submit" value="submit" onclick="sort()">
+</body>
+</html>

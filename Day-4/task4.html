@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        setInterval(()=>{
+            document.getElementById('time').innerHTML = new Date().toTimeString()
+        })
+        function getTime(){
+            console.log(document.getElementById('timeinput').value);
+            t = document.getElementById('timeinput').value.split(':')
+            console.log(t);
+            
+            currentTime = (new Date().getHours()*60)+new Date().getMinutes()
+            // newDate = new Date(t)
+            console.log(currentTime);
+            t = parseInt(t[0])*60 + parseInt(t[1])
+            console.log(t);
+            
+            remainingTime = (t-currentTime)
+
+            // console.log(remainingTime+" "+remainingTime/60);
+            rhours =  Math.floor((remainingTime)/60)
+            rmin = Math.round(((remainingTime/60)-rhours)*60)
+
+            console.log(rhours+":"+rmin);
+            
+            document.getElementById('remainingTime').innerHTML = (rhours+": hr "+rmin+" min")
+                     
+            
+        }
+    </script>
+</head>
+<body>
+    <h1>Currrent time</h1>
+    <h1 id="time"></h1>
+    <h1>Remainig time</h1>
+    <h1 id="remainingTime"></h1>
+    <input type="time" name="" id="timeinput">
+    <input type="submit" value="submit" onclick="getTime()">
+</body>
+</html>

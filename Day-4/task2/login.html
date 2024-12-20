@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        #main{
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #form{
+            height: 72%;
+            width: 72%;
+            max-width: 700px;
+            background-color: grey;
+            border-radius: 3%;
+            border: 2px solid darkgray ;
+            
+            box-shadow: 10px 10px 15px grey;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+            color: white;    
+        }
+        form{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            
+        }
+        #usernameblock,#passwordblock{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 80%;
+            margin-bottom: 30px;
+            font-size: 30px;
+        }
+        input{
+            padding: 15px;
+            background-color: whitesmoke;
+            border: 0px solid black;
+            border-radius: 9px;
+        }
+        input[type=submit]{
+            font-size: 20px;
+            padding: 9px;
+            margin-top: 24px;
+            font-weight: bold;
+            color: white;
+            background-color: black;
+            border: 0px solid black;
+            border-radius: 12px;
+            width: 30%;
+        }
+        p{
+            font-size: 18px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        a{
+            color: black;
+        }
+    </style>
+    <!-- <script>
+        fetch('./record.json').then((response)=>response.json()).then((data)=>{
+            console.log(data);
+        }).catch((err)=> console.error('Error loading json'))
+    </script> -->
+    <script type="module">
+        var username= ""
+        var email =""
+        var password = ""
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+        import { getDatabase , set ,ref,get,child } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDOvgtXjrTO-6_dXLncmI9yvM6PFMW61ls",
+            authDomain: "mvclouds-97c92.firebaseapp.com",
+            projectId: "mvclouds-97c92",
+            storageBucket: "mvclouds-97c92.firebasestorage.app",
+            messagingSenderId: "191632869466",
+            appId: "1:191632869466:web:8dd05acd321aaaa3937063"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app)
+
+        const dbref = ref(db);
+
+        
+        document.getElementById('submit').addEventListener('click',function(e){
+
+            
+            console.log(document.getElementById('username').value);
+            console.log(document.getElementById('username').value);
+            
+            e.preventDefault()
+            get(child(dbref,'user2/'+document.getElementById('username').value)).then((snapshot)=>{
+                if(snapshot.exists()){
+                    console.log(snapshot.val());
+                    
+                    username = snapshot.val().username
+                    password = snapshot.val().password
+
+
+                    if(username == document.getElementById('username').value && password == document.getElementById('password').value){
+                        
+                        setTimeout(()=>{
+                            alert('Login Successfull')
+                            window.location.href = 'home.html'
+                        },2000)
+                    }
+                    else{
+                        throw 'Wrong password'
+                    }
+                    
+                }
+                else{
+                    alert('user not found')
+                }
+            })
+            .catch((error)=>{
+                alert('Unsuccessfull')
+                console.log(error);
+                
+            })
+    })
+
+
+
+// Attach an asynchronous callback to read the data at our posts reference
+        // ref.on('value', (snapshot) => {
+        // console.log(snapshot.val());
+        // }, (errorObject) => {
+        // console.log('The read failed: ' + errorObject.name);
+        // });
+
+        // document.getElementById('submit').addEventListener('click',function(e){
+        //     e.preventDefault()
+        //     console.log(document.getElementById('username').value);
+        //     console.log(document.getElementById('password').value);
+        //     console.log(document.getElementById('gender').value);
+        //     console.log(document.getElementById('dropdown').value);
+            
+            
+            
+        //     set(ref(db,'user/'+document.getElementById('username').value),{
+        //         username : document.getElementById('username').value,
+        //         password : document.getElementById('password').value,
+        //         gender : document.getElementById('gender').value,
+        //         dropdown : document.getElementById('dropdown').value
+                
+        //     });
+        //     alert('Login Success')
+        // })
+      </script>
+</head>
+<body>
+    <div id="main">
+        <div id="form">
+            <h1>Login</h1>
+            <form action="">
+                <div id="usernameblock">
+                    <label for="username">Username : </label> 
+                    <input type="text" id='username' placeholder="Enter username">
+                </div>
+                <div id="passwordblock">
+                    <label for="password">Password : </label>
+                    <input type="password" id="password" placeholder="Enter password">
+                </div>
+                <p>Create a new account, <a href="register.html">register</a></p>
+                <!-- <button><a href="home.html" style="color: azure;text-decoration: none;">Login</a></button> -->
+                <!-- <button onclick="checkUser()">Login</button> -->
+                <input type="submit" value="Login" id="submit">
+
+                 
+            </form>
+        </div>
+    </div>
+</html>
