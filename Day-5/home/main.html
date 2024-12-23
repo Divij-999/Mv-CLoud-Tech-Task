@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Stream</title>
+    <link rel="shortcut icon" href="/media/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="card.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body id="body">
+    <head>
+        <div id="head">
+            <div id="downloadPart">
+                <button>Install Stream</button>
+                <p style="display: flex;align-items: center;padding-right: 15vw;">
+                    <a href="../login/login.html">login</a> &nbsp;|&nbsp;
+                    <select name="language" id="language">
+                        <option value="language" selected disabled>language</option>
+                        <option value="English">English</option>
+                        <option value="Gujrati">Gujrati</option>
+                        <option value="Hindi">Hindi</option>
+                        <option value="French">French</option>
+                    </select>
+                </p>
+            </div>
+            <div id="navbarPart">
+                <div id="headerImage">
+                    <img src="../media/header_logo.png" alt="">
+                </div>
+                <div id="headerOptions">
+                    <span>STORE</span>
+                    <span>COMMUNITY</span>
+                    <span>ABOUT</span>
+                    <span>SUPPORT</span>
+                </div>
+            </div>
+
+        </div>
+    </head>
+    <main>
+        <div id="main">
+            <div id="backVideo">
+                <video autoplay loop muted>
+                    <source src="../media/webm_page_bg_english.webm" type="video/webm">
+                </video>
+                <div id="mainOptions">
+                    <div style="display: flex;justify-content: center;">
+                        <div style="display: flex;align-items: center;justify-content: space-between; width:60vw;background-color: #1E3F89;opacity: 0.9;">
+                            <div id="mainOptionsPart" style="width: 70%;display: flex;justify-content: space-around; font-weight: bold;font-family: Arial, Helvetica, sans-serif;font-size: 14px;">
+                                <span>Your Store</span>
+                                <span>News & Noteworthy</span>
+                                <span>Categories</span>
+                                <span>Points Shop</span>
+                                <span>News</span>
+                                <span>Labs</span>
+                            </div>
+                            <div id="mainSearchPart" style="padding: 5px;">
+                                <!-- <input type="search" name="" placeholder="Search" id="search" style="background-color: #316292;border: none;box-shadow: 2px 2px 4px #316282;"> -->
+                                 <a href="../game-content/search.html" style="text-decoration: none;">
+                                     <button style="height: 27px;color: white;background-color: #316282;border: 1px solid black;font-weight: bold;"onclick='searchMovie()'>Search</button>
+                                 </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="game-options">
+                <div class="carousel-container">
+                    <div class="carousel-wrapper">
+                        <div class="carousel-item">
+                            <div class="carousel-list" onclick="getMovie(1)">
+                                <img src="../media/games/capsule_616x353_175.jpg" alt="Carousel Image 1">
+                                <p>₹ 599</p>
+                            </div>
+                            <div class="carousel-list" onclick="getMovie(41)">
+                                <img src="../media/games/capsule_616x353_176.jpg" alt="Carousel Image 1">
+                                <p>₹ 699</p>
+                            </div>
+                            <div class="carousel-list">
+                                <img src="../media/games/capsule_616x353_177.jpg" alt="Carousel Image 1">
+                                <p>₹ 1599</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="carousel-list">
+                                <img src="../media/games/capsule_616x353_178.jpg" alt="Carousel Image 1">
+                                <p>₹ 1449</p>
+                            </div>
+                            <div class="carousel-list">
+                                <img src="../media/games/capsule_616x353_179.jpg" alt="Carousel Image 1">
+                                <p>₹ 659</p>
+                            </div>
+                            <div class="carousel-list">
+                                <img src="../media/games/capsule_616x353_147.jpg" alt="Carousel Image 1">
+                                <p>₹ 999</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="carousel-list">
+                                <img src="../media/games/capsule_616x353_187.jpg" alt="Carousel Image 1">
+                                <p>₹ 699</p>
+                            </div>
+                            <div class="carousel-list">
+                                <img src="../media/games/capsule_616x353_190.jpg" alt="Carousel Image 1">
+                                <p>₹ 689</p>
+                            </div>
+                            <div class="carousel-list">
+                                <img src="../media/games/capsule_616x353_191.jpg" alt="Carousel Image 1">
+                                <p>₹ 2999</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Carousel Navigation -->
+                    <button class="carousel-button carousel-button-prev" onclick="moveCarousel(-1)">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <button class="carousel-button carousel-button-next" onclick="moveCarousel(1)">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    <!-- Carousel Indicators -->
+                </div>
+                <div class="carousel-indicators">
+                    <div class="carousel-indicator" onclick="goToSlide(0)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(1)"></div>
+                    <div class="carousel-indicator" onclick="goToSlide(2)"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        let currentIndex = 0;
+
+        function moveCarousel(direction) {
+            const items = document.querySelectorAll('.carousel-item');
+            const totalItems = items.length;
+            currentIndex = (currentIndex + direction + totalItems) % totalItems;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            const items = document.querySelectorAll('.carousel-item');
+            const indicators = document.querySelectorAll('.carousel-indicator');
+
+            items.forEach((item, index) => {
+                item.style.display = (index === currentIndex) ? 'flex' : 'none';
+            });
+
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        // Initialize the carousel to show the first slide
+        updateCarousel();
+
+        // function searchMovie(){
+        //     // var gameValue = document.getElementById('search').value
+        //     window.location.href = `../game-content/search.html`
+        // }
+
+        function getMovie(gameId){
+            window.location.href = `/game-content/${gameId}`;
+        }
+
+    </script>
+</body>
+</html>

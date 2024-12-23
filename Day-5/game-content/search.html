@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Games</title>
+    <link rel="stylesheet" href="search.css">
+    <script>
+        async function performSearch() {
+            const query = document.getElementById('search-input').value;
+            if (!query) return;
+
+            const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+            const results = await response.json();
+
+            const resultsContainer = document.getElementById('results');
+            resultsContainer.innerHTML = ''; // Clear previous results
+
+            if (results.length === 0) {
+                resultsContainer.innerHTML = '<p>No games found.</p>';
+                return;
+            }
+
+            results.forEach(game => {
+                const gameDiv = document.createElement('div');
+                gameDiv.classList.add('game-result');
+                gameDiv.innerHTML = `
+                    <h3>${game.game_name}</h3>
+                    <img src="/media/games/${game.image_url}" alt="${game.game_name}" height="150">
+                    <p>${game.game_description}</p>
+                    <a href="/game-content/${game.gameid}">View Details</a>
+                `;
+                resultsContainer.appendChild(gameDiv);
+            });
+        }
+    </script>
+</head>
+<body style="background-image: url('../media//tile_bg_winter_2024_b.webp');">
+    <header>
+        <h1>Search Games</h1>
+    </header>
+    <main>
+        <div id="search-bar">
+            <input type="text" id="search-input" placeholder="Search for games...">
+            <button onclick="performSearch()">Search</button>
+        </div>
+        <div id="results">
+            <!-- Search results will appear here -->
+        </div>
+    </main>
+</body>
+</html>

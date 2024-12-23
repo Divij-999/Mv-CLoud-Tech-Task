@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="shortcut icon" href="/media/favicon.ico" type="image/x-icon">
+    <!-- <link rel="stylesheet" href="../home/main.css"> -->
+    <link rel="stylesheet" href="/main.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        #usernameBlock,#passwordBlock{
+            display: flex;
+            flex-direction: column;
+            font-size: 13px;
+        }
+        input[type=text],input[type=password]{
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #393C44;
+            border: none;
+            margin-top:3px;
+            border-radius: 3px;
+            color: white;
+        }
+        input[type='checkbox']{
+           /* appearance: none;
+           -webkit-appearance: none; */
+
+            background-color: #AFAFAF;
+            margin-bottom: 20px;
+
+            /* border-radius: 2px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* padding: 50px; */
+            /* height: 15px;
+            width: 15px;  */
+        }
+        #checkboxValue{
+            color:#AFAFAF
+        }
+        #submitButton{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+        input[type=submit]{
+            padding: 15px;
+            font-size: 18px;
+            width: 60%;
+            background-color: #287DFF;
+            color: white;
+            border: none;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body id="body">
+    <head>
+        <div id="head">
+            <div id="downloadPart">
+                <button>Install Stream</button>
+                <p style="display: flex;align-items: center;padding-right: 15vw;">
+                    <a href="../login/login.html">login</a> &nbsp;|&nbsp;
+                    <select name="language" id="language">
+                        <option value="language" selected disabled>language</option>
+                        <option value="English">English</option>
+                        <option value="Gujrati">Gujrati</option>
+                        <option value="Hindi">Hindi</option>
+                        <option value="French">French</option>
+                    </select>
+                </p>
+            </div>
+            <div id="navbarPart">
+                <div id="headerImage">
+                    <img src="../media/header_logo.png" onclick="window.location.href='../home/main.html'" alt="">
+                </div>
+                <div id="headerOptions">
+                    <span>STORE</span>
+                    <span>COMMUNITY</span>
+                    <span>ABOUT</span>
+                    <span>SUPPORT</span>
+                </div>
+            </div>
+
+        </div>
+    </head>
+    <main>
+        <div id="main">
+            <div style="background-image: url('../media/new_login_bg_strong_mask.jpg');background-size: cover;height: 90vh;width: 100%;display: flex;justify-content: center;align-items: center;">
+                <div style="height:66%;width: 40%;padding: 10px;font-family: Arial, Helvetica, sans-serif;">
+                    <p style="height: 10%;font-size: 30px;font-weight: bold;margin: 0;margin-bottom: 24px;">Sign in</p>
+                    <div style="background-color: #181A21;height:fit-content;padding: 30px;padding-top: 30px;">
+                        <form action="/login" method="post">
+                            <div id="usernameBlock">
+                                <label for="username" style="color:#1999DB;font-weight: bold;">SIGN IN WITH ACCOUNT NAME</label>
+                                <input type="text" name="username" id="username">
+                            </div>
+                            <div id="passwordBlock">
+                                <label for="password" style="color: #AFAFAF;">PASSWORD</label>
+                                <input type="password" name="password" id="password">
+                            </div>
+                            <div id="checkboxValue">
+                                <input type="checkbox" name="rember" id="rember">
+                                <label for="" id="checkbox">Remember me</label>
+                            </div>
+                            <div id="register">
+                                <p>Create a account , <a href="../login/register.html" style="color: #1999DB;">register</a></p>
+                            </div>
+                            <div id="submitButton">
+                                <input type="submit" value="Sign in">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
