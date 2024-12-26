@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change</title>
+    
+    <link rel="shortcut icon" href="/media/favicon.ico" type="image/x-icon">
+    <!-- <link rel="stylesheet" href="../home/main.css"> -->
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        #usernameBlock,#passwordBlock,#emailBlock,#firstNameBlock,#lastNameBlock{
+            display: flex;
+            flex-direction: column;
+            font-size: 13px;
+        }
+        input[type=text],input[type=password],input[type=email]{
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #393C44;
+            border: none;
+            margin-top:3px;
+            border-radius: 3px;
+            color: white;
+        }
+        input[type='checkbox']{
+           /* appearance: none;
+           -webkit-appearance: none; */
+
+            background-color: #AFAFAF;
+            margin-bottom: 20px;
+
+            /* border-radius: 2px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* padding: 50px; */
+            /* height: 15px;
+            width: 15px;  */
+        }
+        #checkboxValue{
+            color:#AFAFAF
+        }
+        #submitButton{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+        input[type=submit]{
+            padding: 15px;
+            font-size: 18px;
+            width: 60%;
+            background-color: #287DFF;
+            color: white;
+            border: none;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body id="body" style="background-color: #171D25;background-image: none;">
+    <main>
+        <div id="main">
+            <div style="background-image: url('../media/new_login_bg_strong_mask.jpg');background-size: cover;height: 90vh;width: 100%;display: flex;justify-content: center;align-items: center;">
+                <div style="height:90%;width: 40%;padding: 10px;font-family: Arial, Helvetica, sans-serif;">
+                    <p style="height: 10%;font-size: 30px;font-weight: bold;margin: 0;margin-bottom: 24px;">Change Data</p>
+                    <div style="background-color: #181A21;height:fit-content;padding: 30px;padding-top: 30px;">
+                        <form action="/changeData" method="post">
+                            <!-- <div id="usernameBlock">
+                                <label for="username" style="color:#1999DB;font-weight: bold;">SIGN IN WITH ACCOUNT NAME</label>
+                                <input type="text" name="username" id="username">
+                            </div>
+                             -->
+                            <div id="emailBlock">
+                                <label for="email" style="color: #AFAFAF;">EMAIL</label>
+                                <input type="email" name="email" id="email">
+                            </div>
+                            
+                            <div id="firstNameBlock">
+                                <label for="firstName" style="color: #AFAFAF;">FIRST NAME</label>
+                                <input type="text" name="firstName" id="firstName">
+                            </div>
+
+                            
+                            <div id="lastNameBlock">
+                                <label for="lastName" style="color: #AFAFAF;">LAST NAME</label>
+                                <input type="text" name="lastName" id="lastName">
+                            </div>
+                            
+                            <!-- <div id="register">
+                                <p>Already have a account , <a href="../login/login.html" style="color: #1999DB;">login</a></p>
+                            </div> -->
+                            <div id="submitButton">
+                                <input type="submit" id="submit" value="Save Changes">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.getElementById('submit').addEventListener('click',function(e){
+            // e.preventDefault()
+            console.log(document.getElementById('email').value);
+            
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+
+            // Validate inputs
+            if (!emailRegex.test(document.getElementById('email').value)) {
+                alert('Invalid Email');
+                e.preventDefault()
+            }
+            })
+
+            
+        function getCookie(name) {
+            const cookies = document.cookie.split('; ');
+            for (const cookie of cookies) {
+                const [key, value] = cookie.split('=');
+                if (key === name) {
+                    return value;
+                }
+            }
+            return null; // Return null if cookie not found
+        }
+
+        async function defaultLoad() {
+
+            cookies = getCookie('userid')
+
+            if(cookies!=null){
+                firstname = document.getElementById('firstname')
+                lastname = document.getElementById('lastname')
+                // username = document.getElementById('username')
+                email = document.getElementById('email')
+
+                fetch('/changeData').then((response) =>{
+                    console.log('Response Status:', response.status);
+                })
+                .then((data) => {
+                    if(data.message === 'Update Successful'){
+                        window.location.href = '../account/changeData.html'
+                        setTimeout(()=>{
+                            alert('Update Successfull')
+                            window.location.href = '/'
+                        },2000)
+                    }
+                })
+            }
+            
+        }
+        defaultLoad()
+    </script>
+</body>
+</html>

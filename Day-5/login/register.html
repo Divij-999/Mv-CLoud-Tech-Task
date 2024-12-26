@@ -66,7 +66,7 @@
             <div id="downloadPart">
                 <button>Install Stream</button>
                 <p style="display: flex;align-items: center;padding-right: 15vw;">
-                    <a href="../login/login.html">login</a> &nbsp;|&nbsp;
+                    <a href="../login/login.html" id="account">login</a> &nbsp;|&nbsp;
                     <select name="language" id="language">
                         <option value="language" selected disabled>language</option>
                         <option value="English">English</option>
@@ -161,6 +161,31 @@
                 alert('Invalid Password')
             }
             })
+
+            
+        function getCookie(name) {
+            const cookies = document.cookie.split('; ');
+            for (const cookie of cookies) {
+                const [key, value] = cookie.split('=');
+                if (key === name) {
+                    return value;
+                }
+            }
+            return null; // Return null if cookie not found
+        }
+
+        function defaultLoad() {
+
+            cookies = getCookie('userid')
+
+            if(cookies!=null){
+                id = document.getElementById('account')
+                id.innerHTML = 'account'
+                id.href = '../account/account.html'
+            }
+            
+        }
+        defaultLoad()
     </script>
 </body>
 </html>

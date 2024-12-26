@@ -15,7 +15,7 @@
             <div id="downloadPart">
                 <button>Install Stream</button>
                 <p style="display: flex;align-items: center;padding-right: 15vw;">
-                    <a href="../login/login.html">login</a> &nbsp;|&nbsp;
+                    <a href="../login/login.html" id="account">login</a> &nbsp;|&nbsp;
                     <select name="language" id="language">
                         <option value="language" selected disabled>language</option>
                         <option value="English">English</option>
@@ -41,6 +41,10 @@
     </head>
     <main>
         <div id="main">
+            
+            <div id="cart" style="height: 60px;width: 60px;background-color: #5C7E10;display: flex;justify-content: center;align-items: center;font-size: 27px;border-radius: 50%;border: 1px solid white;position: fixed;z-index: 10;bottom: 0%;right: 0%;margin-bottom: 20px;margin-right: 20px;" onclick="window.location.href='../add-to-cart/cart.html'">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </div>
             <div id="backVideo">
                 <video autoplay loop muted>
                     <source src="../media/webm_page_bg_english.webm" type="video/webm">
@@ -59,7 +63,7 @@
                             <div id="mainSearchPart" style="padding: 5px;">
                                 <!-- <input type="search" name="" placeholder="Search" id="search" style="background-color: #316292;border: none;box-shadow: 2px 2px 4px #316282;"> -->
                                  <a href="../game-content/search.html" style="text-decoration: none;">
-                                     <button style="height: 27px;color: white;background-color: #316282;border: 1px solid black;font-weight: bold;"onclick='searchMovie()'>Search</button>
+                                     <button style="height: 27px;color: white;background-color: #316282;border: 1px solid black;font-weight: bold;"onclick='searchMovie()'>Search Movie</button>
                                  </a>
                             </div>
                         </div>
@@ -67,59 +71,8 @@
                 </div>
             </div>
             <div id="game-options">
-                <div class="carousel-container">
-                    <div class="carousel-wrapper">
-                        <div class="carousel-item">
-                            <div class="carousel-list" onclick="getMovie(1)">
-                                <img src="../media/games/capsule_616x353_175.jpg" alt="Carousel Image 1">
-                                <p>₹ 599</p>
-                            </div>
-                            <div class="carousel-list" onclick="getMovie(41)">
-                                <img src="../media/games/capsule_616x353_176.jpg" alt="Carousel Image 1">
-                                <p>₹ 699</p>
-                            </div>
-                            <div class="carousel-list">
-                                <img src="../media/games/capsule_616x353_177.jpg" alt="Carousel Image 1">
-                                <p>₹ 1599</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="carousel-list">
-                                <img src="../media/games/capsule_616x353_178.jpg" alt="Carousel Image 1">
-                                <p>₹ 1449</p>
-                            </div>
-                            <div class="carousel-list">
-                                <img src="../media/games/capsule_616x353_179.jpg" alt="Carousel Image 1">
-                                <p>₹ 659</p>
-                            </div>
-                            <div class="carousel-list">
-                                <img src="../media/games/capsule_616x353_147.jpg" alt="Carousel Image 1">
-                                <p>₹ 999</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="carousel-list">
-                                <img src="../media/games/capsule_616x353_187.jpg" alt="Carousel Image 1">
-                                <p>₹ 699</p>
-                            </div>
-                            <div class="carousel-list">
-                                <img src="../media/games/capsule_616x353_190.jpg" alt="Carousel Image 1">
-                                <p>₹ 689</p>
-                            </div>
-                            <div class="carousel-list">
-                                <img src="../media/games/capsule_616x353_191.jpg" alt="Carousel Image 1">
-                                <p>₹ 2999</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Carousel Navigation -->
-                    <button class="carousel-button carousel-button-prev" onclick="moveCarousel(-1)">
-                        <i class="fa-solid fa-arrow-left"></i>
-                    </button>
-                    <button class="carousel-button carousel-button-next" onclick="moveCarousel(1)">
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                    <!-- Carousel Indicators -->
+                <h1>New Releases</h1>
+                <div id="carousel-container">
                 </div>
                 <div class="carousel-indicators">
                     <div class="carousel-indicator" onclick="goToSlide(0)"></div>
@@ -169,6 +122,110 @@
             window.location.href = `/game-content/${gameId}`;
         }
 
+        
+        async function getData(response){
+            const results = await response.json();
+            
+            const resultsContainer = document.getElementById('carousel-container');
+            //Empty result div
+            resultsContainer.innerHTML = '' ; 
+
+            // if (results.length === 0) {
+            //     resultsContainer.innerHTML = '<p>No games found.</p>';
+            //     return;
+            // }
+            console.log(results);
+            
+
+            // results.forEach(game => {
+            //     // const gameDiv = document.createElement('div');
+            //     // gameDiv.classList.add('game-result');
+            //     // console.log(gameDiv);
+
+            //     // <h3>${game.game_name}</h3>
+            //     //     <img src="/media/games/${game.image_url}" alt="${game.game_name}" height="150">
+            //     //     <p>${game.game_description}</p>
+            //     //     <a href="/game-content/${game.gameid}">View Details</a>
+
+                
+            //     resultsContainer.innerHTML = `
+            //         <div class="carousel-wrapper">
+            //             <div class="carousel-item">
+            //                 <div class="carousel-list" onclick="getMovie(${game.gameid})"}>
+            //                     <img src="/media/games/${game.image_url}" alt="${game.game_name}">
+            //                     <p>₹ ${game.price}</p>
+            //                 </div>
+            //                 <div class="carousel-list" onclick="getMovie(41)">
+            //                     <img src="../media/games/capsule_616x353_176.jpg" alt="Carousel Image 1">
+            //                     <p>₹ 699</p>
+            //                 </div>
+            //                 <div class="carousel-list">
+            //                     <img src="../media/games/capsule_616x353_177.jpg" alt="Carousel Image 1">
+            //                     <p>₹ 1599</p>
+            //                 </div>
+            //             </div>
+            //         </div>
+            //     `;
+            //     // console.log(gameDiv);
+                
+            //     // resultsContainer.appendChild(gameDiv);
+            // });
+            let htmlContent = '<div class="carousel-wrapper">';
+
+            for (let i = 0; i < results.length; i += 3) {
+            htmlContent += '<div class="carousel-item">';
+
+            for (let j = i; j < i + 3; j++) {
+                const game = results[j];
+                
+                htmlContent += `
+                    <div class="carousel-list" onclick="getMovie(${game.gameid})">
+                        <img src="/media/games/${game.image_url}" alt="${game.game_name}">
+                        <p>₹ ${game.price}</p>
+                    </div>
+                `;
+            }
+
+            htmlContent += '</div>';
+            }
+            htmlContent += `
+            <button class="carousel-button carousel-button-prev" onclick="moveCarousel(-1)">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <button class="carousel-button carousel-button-next" onclick="moveCarousel(1)">
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+            </div>`;
+            resultsContainer.innerHTML = htmlContent;
+
+
+        }
+
+        function getCookie(name) {
+            const cookies = document.cookie.split('; ');
+            for (const cookie of cookies) {
+                const [key, value] = cookie.split('=');
+                if (key === name) {
+                    return value;
+                }
+            }
+            return null;
+        }
+
+        async function defaultLoad() {
+            const response = await fetch(`/api/search_newReleases`);
+            getData(response)
+
+            cookies = getCookie('userid')
+
+            if(cookies!=null){
+                id = document.getElementById('account')
+                id.innerHTML = 'account'
+                id.href = '../account/account.html'
+            }
+            
+        }
+        defaultLoad()
     </script>
 </body>
 </html>

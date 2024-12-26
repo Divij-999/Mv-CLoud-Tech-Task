@@ -5,16 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Games</title>
     <link rel="stylesheet" href="search.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script>
-        async function performSearch() {
-            const query = document.getElementById('search-input').value;
-            if (!query) return;
 
-            const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+        // rmeove content pending and check if existing or not 
+
+        async function getData(response){
             const results = await response.json();
-
+            
             const resultsContainer = document.getElementById('results');
-            resultsContainer.innerHTML = ''; // Clear previous results
+            //Empty result div
+            resultsContainer.innerHTML = '' ; 
 
             if (results.length === 0) {
                 resultsContainer.innerHTML = '<p>No games found.</p>';
@@ -24,25 +25,187 @@
             results.forEach(game => {
                 const gameDiv = document.createElement('div');
                 gameDiv.classList.add('game-result');
+                console.log(gameDiv);
+                
                 gameDiv.innerHTML = `
                     <h3>${game.game_name}</h3>
                     <img src="/media/games/${game.image_url}" alt="${game.game_name}" height="150">
                     <p>${game.game_description}</p>
                     <a href="/game-content/${game.gameid}">View Details</a>
                 `;
+                console.log(gameDiv);
+                
                 resultsContainer.appendChild(gameDiv);
             });
         }
+
+        async function performSearch() {
+            const query = document.getElementById('search-input').value;
+            if (!query) return;
+            const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+            getData(response)
+            
+        }
+        // document.addEventListener('click', function(event) {
+        //     var dropdown = document.querySelector('.dropdown-content');
+        //     if (!dropdown.contains(event.target)) {
+        //         dropdown.style.display = 'none';
+        //     }
+        //     });
+
+            function getSelectedGenre() {
+            var checkboxes = document.querySelectorAll('.dropdown-content input[type="checkbox"]');
+            console.log(checkboxes);
+            
+            var selectedFruits = [];
+            checkboxes.forEach(function(checkbox) {
+                if (checkbox.checked) {
+                selectedFruits.push(checkbox.value);
+                }
+            });
+            return selectedFruits;
+            }
+
+            // Example usage
+            // document.querySelector('.dropdown button').addEventListener('click', function() {
+                // });
+            async function dropDownButton(){
+                var genreList = getSelectedGenre()
+                console.log(genreList);
+                console.log(typeof genreList);
+                
+                const response = await fetch(`/api/search?q=${genreList.join(',')}`);
+                console.log(response);
+                getData(response)
+                
+            }
+            
+            async function defaultLoad() {
+                const response = await fetch(`/api/searchAll`);
+                getData(response)
+                
+            }
+            defaultLoad()
     </script>
+    <style>
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            }
+
+            .dropdown-content {
+            display: none;
+            position: absolute;
+            border: 3px solid white; border-radius: 3px;background-color:#171D25;
+            /* min-width: 160px; */
+            width: fit-content;
+            /* margin-top: 5px; */
+            padding: 5px;
+            color: white;
+            /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);11 */
+            z-index: 1;
+            
+            }
+
+            .dropdown-content label {
+            display: block;
+            margin-top: 10px;
+            color: white;
+            }
+
+            .dropdown:hover .dropdown-content {
+            display: flex;
+            flex-direction: column;
+            /* justify-content: start; */
+            }
+    </style>
 </head>
-<body style="background-image: url('../media//tile_bg_winter_2024_b.webp');">
+<body>
     <header>
         <h1>Search Games</h1>
     </header>
     <main>
-        <div id="search-bar">
+        
+        <div id="cart" style="height: 60px;width: 60px;background-color: #5C7E10;display: flex;justify-content: center;align-items: center;font-size: 27px;border-radius: 50%;border: 1px solid white;position: fixed;z-index: 10;bottom: 0%;right: 0%;margin-bottom: 20px;margin-right: 20px;" onclick="window.location.href='/../add-to-cart/cart.html'">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </div>
+        <div id="searchBar">
             <input type="text" id="search-input" placeholder="Search for games...">
             <button onclick="performSearch()">Search</button>
+            <div class="dropdown">
+                <button>Genre</button>
+                <div class="dropdown-content" onclick="dropDownButton()">
+                    <div style="display: flex; align-items: end;height: fit-content;">
+                        <input type="checkbox"style="margin-right:6px" name="fruits" value="RPG">
+                        <label> RPG</label>
+                    </div>
+                    <div style="display: flex; align-items: end;height: fit-content;">
+                        <input type="checkbox" style="margin-right:6px" name="fruits" value="Sci-fi">
+                        <label> Sci-fi</label>
+                    </div>
+                    <div style="display: flex; align-items: end;height: fit-content;">
+                        <input type="checkbox" style="margin-right:6px" name="fruits" value="Sandbox">
+                        <label> Sandbox</label>
+                    </div>
+                    <div style="display: flex; align-items: end;height: fit-content;">
+                        <input type="checkbox"style="margin-right:6px" name="fruits" value="Survival">
+                        <label> Survival</label>
+                    </div>
+                    <div style="display: flex; align-items: end;height: fit-content;">
+                        <input type="checkbox"style="margin-right:6px" name="fruits" value="Action">
+                        <label> Action</label>
+                    </div>
+                    <div style="display: flex; align-items: end;height: fit-content;">
+                        <input type="checkbox"style="margin-right:6px" name="fruits" value="Adventure">
+                        <label> Adventure</label>
+                    </div>
+                    <div style="display: flex; align-items: end;height: fit-content;">
+                        <input type="checkbox"style="margin-right:6px" name="fruits" value="Shooter">
+                        <label> Shooter</label>
+                    </div>
+                    <div style="display: flex; align-items: end;height: fit-content;">
+                        <input type="checkbox"style="margin-right:6px" name="fruits" value="Social">
+                        <label> Social</label>
+                    </div>
+                    <div style="display: flex; align-items: end;height: fit-content;">
+                        <input type="checkbox"style="margin-right:6px" name="fruits" value="Party">
+                        <label> Party</label>
+                    </div>
+                    <div style="display: flex; align-items: end;height: fit-content;">
+                        <input type="checkbox"style="margin-right:6px" name="fruits" value="Competative">
+                        <label> Competative</label>
+                    </div>
+                    <div style="display: flex; align-items: end;height: fit-content;">
+                        <input type="checkbox"style="margin-right:6px" name="fruits" value="Multiplayer">
+                        <label> Multiplayer</label>
+                    </div>
+                    <div style="display: flex; align-items: end;height: fit-content;">
+                        <input type="checkbox"style="margin-right:6px" name="fruits" value="Strategy">
+                        <label> Strategy</label>
+                    </div>
+                    <div style="display: flex; align-items: end;height: fit-content;">
+                        <input type="checkbox"style="margin-right:6px" name="fruits" value="Sports">
+                        <label> Sports</label>
+                    </div>
+                    <div style="display: flex; align-items: end;height: fit-content;">
+                        <input type="checkbox"style="margin-right:6px" name="fruits" value="Platformer">
+                        <label> Platformer</label>
+                    </div>
+                    <div style="display: flex; align-items: end;height: fit-content;">
+                        <input type="checkbox"style="margin-right:6px" name="fruits" value="Puzzele">
+                        <label> Puzzele</label>
+                    </div>
+                    <div style="display: flex; align-items: end;height: fit-content;">
+                        <input type="checkbox"style="margin-right:6px" name="fruits" value="Simulation">
+                        <label> Simulation</label>
+                    </div>
+                    <div style="display: flex; align-items: end;height: fit-content;">
+                        <input type="checkbox"style="margin-right:6px" name="fruits" value="Card Game">
+                        <label> Card Game</label>
+                    </div>
+                </div>
+              </div>
+              
         </div>
         <div id="results">
             <!-- Search results will appear here -->

@@ -1,6 +1,10 @@
+#game-options{
+    display: flex;
+    flex-direction: column;
+    height: 54%;
+}
 
-
-.carousel-container {
+#carousel-container {
     width: 90%;
     max-width: 90%;
     margin: 0 auto;
@@ -22,7 +26,7 @@
 
 .carousel-item img {
     width: 300px;
-    height: auto;
+    height: 200px;
     /* margin: 30px; */
 }
 

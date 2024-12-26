@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create your account</title>
+    
+    <link rel="shortcut icon" href="/media/favicon.ico" type="image/x-icon">
+    <!-- <link rel="stylesheet" href="../home/main.css"> -->
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        #usernameBlock,#cardholderBlock,#cardNumberBlock{
+            display: flex;
+            flex-direction: column;
+            font-size: 13px;
+        }
+        input[type=text],input[type=tel],input[type=date]{
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #393C44;
+            border: none;
+            margin-top:3px;
+            border-radius: 3px;
+            color: white;
+        }
+        #submitButton{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+        input[type=submit]{
+            padding: 15px;
+            font-size: 18px;
+            width: 60%;
+            background-color: #287DFF;
+            color: white;
+            border: none;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body id="body" style="background-color: #171D25;background-image: none;">
+    <main>
+        <div id="main">
+            <div style="height: 90vh;width: 100%;display: flex;justify-content: center;align-items: center;">
+                <div style="height:90%;width: 40%;padding: 10px;font-family: Arial, Helvetica, sans-serif;">
+                    <p style="height: 10%;font-size: 30px;font-weight: bold;margin: 0;margin-bottom: 24px;">Payment Details</p>
+                    <div style="background-color: #181A21;height:fit-content;padding: 30px;padding-top: 30px;">
+                        <form action="/payment" method="post">
+                            <div id="cardholderBlock">
+                                <label for="cardholder" >CARDHOLDER'S NAME</label>
+                                <input type="text" name="cardholder" id="cardholder">
+                            </div>
+                            
+                            <div id="cardNumberBlock">
+                                <label for="cardnumber" style="color: #AFAFAF;">CARD NUMBER</label>
+                                <input type="tel" name="cardnumber" id="cardnumber" maxlength="16">
+                            </div>
+                            
+                            <div style="width: 100%;display: flex;">
+                                <div style="width: 50%;display: flex;flex-direction: column;">
+                                    <label for="expiryDate" style="color: #AFAFAF;">EXPIRY DATE</label>
+                                    <input type="date" name="expiryDate" id="expiryDate" style="width: 80%;">
+                                </div>
+                                <div style="width: 50%;display: flex;flex-direction: column;">
+                                    <label for="cardCVV" style="color: #AFAFAF;">CVV</label>
+                                    <input type="tel" name="cardCVV" id="cardCVV" maxlength="3" style="width: 80%;">
+                                </div>
+                            </div>
+                            <div id="submitButton">
+                                <input type="submit" id="submit" value="Payment">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- <script>
+            
+        function getCookie(name) {
+            const cookies = document.cookie.split('; ');
+            for (const cookie of cookies) {
+                const [key, value] = cookie.split('=');
+                if (key === name) {
+                    return value;
+                }
+            }
+            return null; // Return null if cookie not found
+        }
+
+        function defaultLoad() {
+
+            cookies = getCookie('userid')
+
+            if(cookies!=null){
+                id = document.getElementById('account')
+                id.innerHTML = 'account'
+                id.href = '../account/account.html'
+            }
+            
+        }
+        defaultLoad()
+    </script> -->
+</body>
+</html>

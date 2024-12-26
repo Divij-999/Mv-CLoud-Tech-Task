@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="shortcut icon" href="/media/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/main.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #171d25;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Main Section Styling */
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 85vh;
+            padding: 20px;
+        }
+
+        #accountInfo {
+            width: 90%;
+            max-width: 500px;
+            background: #1e2a38;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            font-size: 1.5rem;
+            text-align: left;
+            padding-bottom: 15px;
+            color: #00bcd4;
+        }
+
+        td {
+            padding: 20px;
+        }
+
+        td:first-child {
+            font-weight: bold;
+        }
+
+        td:not(:first-child) {
+            /* background-color: #00bcd4; */
+            color: white;
+            border-radius: 5px;
+            padding-left: 10px;
+        }
+        td button{
+            padding: 10px;
+            border: none;
+            background-color: #00bcd4;
+            color: white;
+            font-size: 18px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        td button:hover{
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #accountInfo {
+                width: 100%;
+                padding: 15px;
+            }
+
+            th {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- <header>
+        <a href="">Home</a>
+    </header> -->
+    <main>
+        <div id="accountInfo">
+            <table>
+                <tr>
+                    <th colspan="2">Profile</th>
+                </tr>
+                <tr>
+                    <td>Username</td>
+                    <td id="username">Not Provided</td>
+                </tr>
+                <tr>
+                    <td>Full name</td>
+                    <td id="fullname">Not Provided</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td id="email">Not Provided</td>
+                </tr>
+                <tr align="center">
+                   <td>
+                    <a href="../account/changeData.html">
+                        <button>Change Data</button>
+                    </a>
+                   </td> 
+                   <td>
+                    <a href="/">
+                        <button onclick="clearCookies()">Log out</button>
+                    </a>
+                   </td> 
+                </tr>
+            </table>
+        </div>
+    </main>
+    <script>
+
+        function clearCookies(){
+            document.cookie = "userid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            window.location.href = '/'
+
+        }
+        function getCookie(name) {
+            const cookies = document.cookie.split('; ');
+            for (const cookie of cookies) {
+                const [key, value] = cookie.split('=');
+                if (key === name) {
+                    return value;
+                }
+            }
+            return null;
+        }
+
+        
+        async function defaultLoad() {
+            cookies = getCookie('userid')
+
+            if(cookies!=null){
+                const response = await fetch(`/api/user_data/`);        
+                const results = await response.json();
+                console.log(results[0]);
+                
+
+                
+                fullname1 = document.getElementById('fullname')
+                username1 = document.getElementById('username')
+                email1 = document.getElementById('email')
+
+                username1.innerHTML = results[0].username
+                fullname1.innerHTML = results[0].firstname+" "+results[0].lastname
+                email1.innerHTML = results[0].email
+                
+
+            }
+            
+        }
+        defaultLoad()
+    </script>
+</body>
+</html>
