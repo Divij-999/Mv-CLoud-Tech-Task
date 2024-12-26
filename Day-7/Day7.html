@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+#div1 {
+  width: 300px;
+  height: 300px;
+  /* min-height: fit-content; */
+  /* padding: 10px; */
+  /* border: 1px solid #aaaaaa; */
+  background-color: red;
+  border-radius: 50%;
+}
+.dragObject{
+    
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    position: absolute;
+}
+</style>
+</head>
+<body>
+
+<h1>Day 7 </h1>
+
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<br>
+<div id="draggableDiv">
+    <div id="draggable0" class="dragObject" draggable="true" ondragstart="drag(event)" style="background-color: blue;"></div>
+</div> 
+<script>
+
+    const hexCharacters = [0,1,2,3,4,5,6,7,8,9,"A","B","C","D","E","F"]
+    
+    function getCharacter(index) {
+        return hexCharacters[index]
+    }
+    
+    function generateNewColor() {
+        let hexColorRep = "#"
+    
+        for (let index = 0; index < 6; index++){
+            const randomPosition = Math.floor ( Math.random() * hexCharacters.length ) 
+            hexColorRep += getCharacter( randomPosition )
+        }
+    
+        return hexColorRep
+    }
+    var value;
+    var clickCount = 1
+
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+    
+    function drag(ev) {
+        value = ev
+    }
+    
+    function drop(ev) {
+        ev.preventDefault();
+        
+        var temp;
+        temp = ev.target
+        console.log(temp);
+        console.log(clickCount);
+        
+        if(ev.target.id != 'div1' || clickCount>1){
+            
+            temp = document.getElementById(`draggable${(clickCount-2)}`)
+        }
+        
+        value.target.style.scale = '0.9'
+        
+        temp.appendChild(value.target);
+        document.getElementById('draggableDiv').innerHTML = `<div id="draggable${clickCount}" class="dragObject" draggable="true" ondragstart="drag(event)" style="background-color: ${generateNewColor()};"></div>`
+        clickCount+=1
+    }
+
+</script>
+</body>
+</html>
+
