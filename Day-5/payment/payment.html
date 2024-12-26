@@ -78,7 +78,7 @@
             </div>
         </div>
     </main>
-    <!-- <script>
+    <script>
             
         function getCookie(name) {
             const cookies = document.cookie.split('; ');
@@ -91,7 +91,7 @@
             return null; // Return null if cookie not found
         }
 
-        function defaultLoad() {
+        async function defaultLoad() {
 
             cookies = getCookie('userid')
 
@@ -99,10 +99,18 @@
                 id = document.getElementById('account')
                 id.innerHTML = 'account'
                 id.href = '../account/account.html'
+
+                // const response = await fetch('http://localhost:8080/api/game-cart-data');
+                // if (!response.ok) throw new Error('Failed to fetch game data');
+                // const gameData = await response.json();
+                // console.log(gameData);
+
+                
+                // document.cookie = `paymentid=${paymentid}; path=/`
             }
             
         }
         defaultLoad()
-    </script> -->
+    </script>
 </body>
 </html>

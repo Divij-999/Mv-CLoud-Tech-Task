@@ -7,52 +7,62 @@
     <link rel="stylesheet" href="cart.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script>
-        // async function performSearch() {
-        //     const query = document.getElementById('search-input').value;
-        //     if (!query) return;
-        //     console.log(query);
+        async function performSearch() {
+            const query = document.getElementById('search-input').value;
+            if (!query) return;
+            console.log(query);
             
-        //     console.log('HTML : '+query);
+            console.log('HTML : '+query);
             
-        //     const response = await fetch(`/api/searchCart?q=${encodeURIComponent(query)}`);
-        //     const results = await response.json();
-        //     console.log(results);
+            const response = await fetch(`/api/searchCart?q=${encodeURIComponent(query)}`);
+            const results = await response.json();
+            console.log(results);
             
 
-        //     const resultsContainer = document.getElementById('results');
-        //     //Empty result div
-        //     resultsContainer.innerHTML = '' ; 
+            const resultsContainer = document.getElementById('results');
+            //Empty result div
+            resultsContainer.innerHTML = '' ; 
 
-        //     if (results.length === 0) {
-        //         resultsContainer.innerHTML = '<p>No games found.</p>';
-        //         return;
-        //     }
+            if (results.length === 0) {
+                resultsContainer.innerHTML = '<p>No games found.</p>';
+                return;
+            }
 
-        //     results.forEach(game => {
-        //         const gameDiv = document.createElement('div');
-        //         gameDiv.classList.add('game-result1');
-        //         console.log(gameDiv);
+            results.forEach(game => {
+                const gameDiv = document.createElement('div');
+                gameDiv.classList.add('game-result1');
+                console.log(gameDiv);
+
+                let purchaseButton;
+                if(game.purchasestatus){
+                    purchaseButton = `<h3 style='margin:0px;margin-right:9px;background-color:#5c7e10;padding:5px;border-radius:3px;margin-bottom:10px'>₹&nbsp;Purchased</h3>`
+                    }
+                    else{
+                        purchaseButton = `
+                        <h3 style='margin:0px;margin-right:9px;background-color:#5c7e10;padding:5px;border-radius:3px;margin-bottom:10px'>₹&nbsp;${game.price}</h3>
+                        <button style='border:none' onclick='addGameId(${game.gameid})'><a href="/payment/payment.html">Purchase</a></button>`
+                }
                 
-        //         gameDiv.innerHTML = `
-        //         <div style='width:50%'>
-        //             <img src="/media/games/${game.image_url}" alt="${game.game_name}" height="100">
-        //             <div style='display:block;margin-top:25px'>
-        //                 <h3 style='margin:0px;margin-bottom:9px'>${game.game_name} 123</h3>
-        //                 <h5 style='margin:0px;margin-bottom:9px;color:whitesmoke'>Developer : ${game.developer}</h5>
-        //                 <button><a href="/game-content/${game.gameid}">View Details</a></button>
-        //             </div>
-        //         </div>
-        //         <div style='width:50%;display:flexbox ; justify-content:end;align-items:center;'>
-        //             <div style='display:block'>
-        //                 <h3 style='margin:0px;margin-right:9px;background-color:#5c7e10;padding:5px;border-radius:3px'>₹&nbsp;${game.price}</h3>
-        //             </div>
-        //         </div>
-        //         `;
-        //         console.log(gameDiv);
+                gameDiv.innerHTML = `
+                    <div style='width:50%'>
+                        <img src="/media/games/${game.image_url}" alt="${game.game_name}" height="100" width='180'>
+                        <div style='display:block;margin-top:25px'>
+                            <h3 style='margin:0px;margin-bottom:9px'>${game.game_name} 123</h3>
+                            <h5 style='margin:0px;margin-bottom:9px;color:whitesmoke'>Developer : ${game.developer}</h5>
+                            <button><a href="/game-content/${game.gameid}">View Details</a></button>
+                        </div>
+                    </div>
+                    <div style='width:50%;display:flexbox ; justify-content:end;align-items:center;'>
+                        <div style='display:block'>
+                            ${purchaseButton}
+                        </div>
+                    </div>
+                    `;
+                console.log(gameDiv);
                 
-        //         resultsContainer.appendChild(gameDiv);
-        //     });
-        // }
+                resultsContainer.appendChild(gameDiv);
+            });
+        }
         function addGameId(gameid){
             document.cookie = `gameid=${gameid}; path=/`
         }
@@ -77,22 +87,33 @@
                     gameDiv.classList.add('game-result1');
                     console.log(gameDiv);
                     
-                    gameDiv.innerHTML = `
-                    <div style='width:50%'>
-                        <img src="/media/games/${game.image_url}" alt="${game.game_name}" height="100">
-                        <div style='display:block;margin-top:25px'>
-                            <h3 style='margin:0px;margin-bottom:9px'>${game.game_name} 123</h3>
-                            <h5 style='margin:0px;margin-bottom:9px;color:whitesmoke'>Developer : ${game.developer}</h5>
-                            <button><a href="/game-content/${game.gameid}">View Details</a></button>
-                        </div>
-                    </div>
-                    <div style='width:50%;display:flexbox ; justify-content:end;align-items:center;'>
-                        <div style='display:block'>
+                    let purchaseButton;
+                    console.log(game.purchasestatus);
+                    
+                    if(game.purchasestatus){
+                        purchaseButton = `<h3 style='margin:0px;margin-right:9px;background-color:#5c7e10;padding:5px;border-radius:3px;margin-bottom:10px'>₹&nbsp;Purchased</h3>`
+                        }
+                        else{
+                            purchaseButton = `
                             <h3 style='margin:0px;margin-right:9px;background-color:#5c7e10;padding:5px;border-radius:3px;margin-bottom:10px'>₹&nbsp;${game.price}</h3>
-                            <button style='border:none' onclick='addGameId(${game.gameid})'><a href="/payment/payment.html">Purchase</a></button>
+                            <button style='border:none' onclick='addGameId(${game.gameid})'><a href="/payment/payment.html">Purchase</a></button>`
+                    }
+                    
+                    gameDiv.innerHTML = `
+                        <div style='width:50%'>
+                            <img src="/media/games/${game.image_url}" alt="${game.game_name}" height="100" width='180'>
+                            <div style='display:block;margin-top:25px'>
+                                <h3 style='margin:0px;margin-bottom:9px'>${game.game_name} 123</h3>
+                                <h5 style='margin:0px;margin-bottom:9px;color:whitesmoke'>Developer : ${game.developer}</h5>
+                                <button><a href="/game-content/${game.gameid}">View Details</a></button>
                             </div>
-                    </div>
-                    `;
+                        </div>
+                        <div style='width:50%;display:flexbox ; justify-content:end;align-items:center;'>
+                            <div style='display:block'>
+                                ${purchaseButton}
+                            </div>
+                        </div>
+                        `;
                     console.log(gameDiv);
                     
                     resultsContainer.appendChild(gameDiv);
