@@ -9,22 +9,46 @@
     <script>
         // Function to fetch game data and update the page dynamically
         var gameid = null
+
+        function getCookieByName(name) {
+            const cookies = document.cookie.split(';');
+            for (let cookie of cookies) {
+                cookie = cookie.trim();
+                if (cookie.startsWith(name + '=')) {
+                    return cookie.substring(name.length + 1);
+                }
+            }
+            return null;
+        }
+        var cookie_value;
+        cookie_value = getCookieByName('userid')
         async function addToCart(){
             try{
-
-                // const response = await fetch(`/api/addCart?q='${gameid}'`); MYSQL
-                const response = await fetch(`/api/addCart?q=${gameid}`);
-                console.log(response.status);
-                
-                if(response.status == '200'){
-                    alert('Game added to cart')
-                }
-                else if(response.status == '409'){
-                    alert('Already in cart')
+                if(cookie_value==null){
+                    alert('Login to add to cart')
+                    setTimeout(()=>{
+                        window.location.href = '/login/login.html'
+                    },1000)
                 }
                 else{
-                    alert('Add Failed')
+                    console.log(cookie_value);
+    
+                    // const response = await fetch(`/api/addCart?q='${gameid}'`); MYSQL
+                    const response = await fetch(`/api/addCart?q=${gameid}`);
+                    console.log(response.status);
+                    
+                    if(response.status == '200'){
+                        alert('Game added to cart')
+                    }
+                    else if(response.status == '409'){
+                        alert('Already in cart')
+                    }
+                    else{
+                        alert('Add Failed')
+                    }
                 }
+                
+                
             }
             catch (error) {
                 console.error('Error fetching game data:', error);
@@ -65,7 +89,7 @@
 
                 console.log(gameData.purchasestatus);
                 
-                if(gameData.purchasestatus){
+                if(gameData.purchasestatus && (cookie_value!=null)){
                     document.getElementById('addToCart').innerHTML = 'Already Purchased'
                 }
 
@@ -97,7 +121,7 @@
             <div style="height: 83%;width: 90%;display: flex;padding: 20px;">
                 <div id="gameinfo" style="width: 50%;height: 100%;">
                     <h1 id="gametitle">Loading...</h1>
-                    <img src='../media/games/capsule_616x353_191.jpg' id="gameimage"  height="250" alt="Game Image" style="border: 3px solid white; border-radius: 3px;box-shadow: 5px 5px 3px white;margin-right: 30px;margin-bottom: 30px;">
+                    <img src='' id="gameimage"  height="250" alt="Game Image" style="border: 3px solid white; border-radius: 3px;box-shadow: 5px 5px 3px white;margin-right: 30px;margin-bottom: 30px;">
                     <p id="gamedescription">Loading game description...</p>
                 </div>
                 <div id="gamespecifications" style="display: flex;margin-left: 20%;height: fit-content;width: 50%;flex-direction: column;">

@@ -220,42 +220,42 @@ app.get('/api/addCart', async (req, res) => {
 // Serve game content for a specific game
 app.get('/game-content/:id', async (req, res) => {
   const productId = req.params.id;
+  console.log(productId);
+  
 
   try {
-    // Query to fetch game details and requirements
-    const sql = `
-      SELECT 
-        games.gameid,
-        games.game_name, 
-        games.game_description, 
-        games.image_url,
-        games.publisher,
-        games.genre,
-        games.release_date,
-        games.price,
-        games.developer,
-        games.mature_content_description,
-        game_requirements.os, 
-        game_requirements.processor, 
-        game_requirements.game_memory, 
-        game_requirements.graphics, 
-        game_requirements.game_storage,
-        game_cart.purchasestatus
-      FROM games
-      INNER JOIN game_requirements 
+    const sql = `SELECT 
+      games.gameid,
+      games.game_name, 
+      games.game_description, 
+      games.image_url,
+      games.publisher,
+      games.genre,
+      games.release_date,
+      games.price,
+      games.developer,
+      games.mature_content_description,
+      game_requirements.os, 
+      game_requirements.processor, 
+      game_requirements.game_memory, 
+      game_requirements.graphics, 
+      game_requirements.game_storage,
+      game_cart.purchasestatus
+    FROM games
+    LEFT JOIN game_requirements 
       ON games.gameid = game_requirements.gameid
-      INNER JOIN game_cart
+    LEFT JOIN game_cart
       ON games.gameid = game_cart.gameid
-      WHERE games.gameid = $1
-    `;
+    WHERE games.gameid = $1`;
     const result = await pool.query(sql, [productId]);
-
+    console.log(result.rows);
+    
     if (result.rows.length > 0) {
       const gameData = result.rows[0];
       console.log(gameData);
 
-      res.sendFile(path.join(__dirname, '../game-content/game-content.html'));
       app.locals.currentGameData = gameData; // Store game data for further use if needed
+      res.status(200).sendFile(path.join(__dirname, '../game-content/game-content.html'));
     } else {
       res.status(404).send('Game not found');
     }
