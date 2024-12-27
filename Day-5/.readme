@@ -1,0 +1,5 @@
+To run project 
+
+Open Folder Day-5 -> server 
+cd ./server
+node server_pg.js
