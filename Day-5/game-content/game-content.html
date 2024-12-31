@@ -6,6 +6,50 @@
     <title>Game Details</title>
     <link rel="stylesheet" href="game-content.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+            #snackbar {
+            visibility: hidden;
+            min-width: 250px; 
+            margin-left: -125px; 
+            background-color: #5C7E10;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px; 
+            padding: 16px; 
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            top: 30px;
+            font-weight: bold;
+            font-size: large;
+            }
+
+            #snackbar.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            }
+
+            @-webkit-keyframes fadein {
+            from {top: 0; opacity: 0;}
+            to {top: 30px; opacity: 1;}
+            }
+
+            @keyframes fadein {
+            from {top: 0; opacity: 0;}
+            to {top: 30px; opacity: 1;}
+            }
+
+            @-webkit-keyframes fadeout {
+            from {top: 30px; opacity: 1;}
+            to {top: 0; opacity: 0;}
+            }
+
+            @keyframes fadeout {
+            from {top: 30px; opacity: 1;}
+            to {top: 0; opacity: 0;}
+            }
+    </style>
     <script>
         // Function to fetch game data and update the page dynamically
         var gameid = null
@@ -23,9 +67,13 @@
         var cookie_value;
         cookie_value = getCookieByName('userid')
         async function addToCart(){
+            snackbarId = document.getElementById('snackbar')
+            snackbarId.className = "show";
             try{
                 if(cookie_value==null){
-                    alert('Login to add to cart')
+                    
+                    snackbarId.innerHTML = 'Login to add to cart'
+                    setTimeout(function(){ snackbarId.className = snackbarId.className.replace("show", ""); }, 3000);
                     setTimeout(()=>{
                         window.location.href = '/login/login.html'
                     },1000)
@@ -33,18 +81,25 @@
                 else{
                     console.log(cookie_value);
     
-                    // const response = await fetch(`/api/addCart?q='${gameid}'`); MYSQL
                     const response = await fetch(`/api/addCart?q=${gameid}`);
                     console.log(response.status);
                     
                     if(response.status == '200'){
-                        alert('Game added to cart')
+                        snackbarId.innerHTML =  ('Game added to cart')
+                        setTimeout(function(){ snackbarId.className = snackbarId.className.replace("show", ""); }, 3000);
+
                     }
                     else if(response.status == '409'){
-                        alert('Already in cart')
+                        snackbarId.innerHTML = 'Download Started'
+                        setTimeout(function(){ snackbarId.className = snackbarId.className.replace("show", ""); }, 3000);
+                        setTimeout(function(){
+                        window.location.href = '/game-content/download.html'
+                    },4000)
+                        // setTimeout(function(){ snackbarId.className = snackbarId.className.replace("show", ""); }, 3000);
                     }
                     else{
-                        alert('Add Failed')
+                        snackbarId.innerHTML =  ('Add Failed')
+                        setTimeout(function(){ snackbarId.className = snackbarId.className.replace("show", ""); }, 3000);
                     }
                 }
                 
@@ -89,8 +144,9 @@
 
                 console.log(gameData.purchasestatus);
                 
-                if(gameData.purchasestatus && (cookie_value!=null)){
-                    document.getElementById('addToCart').innerHTML = 'Already Purchased'
+                if(gameData.purchasestatus && (getCookieByName('userid')!=null)){
+                    document.getElementById('addToCart').innerHTML = 'Download'
+
                 }
 
             } catch (error) {
@@ -177,6 +233,7 @@
             <div style="height: 10%;">
                 <button style="margin-top: 30px;background-color: #5C7E10; padding: 15px;padding-left: 150px;padding-right: 150px;border-radius: 50px;color: white;font-size: 20px;font-weight: bold;border: none;" onclick="addToCart()" id="addToCart">Add to Cart</button>
             </div>
+            <div id="snackbar"></div>
         </div>
     </main>
 </body>

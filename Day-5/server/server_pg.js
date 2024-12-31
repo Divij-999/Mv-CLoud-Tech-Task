@@ -167,6 +167,11 @@ app.get('/game-content/search.html/', (req, res) => {
   res.sendFile(path.join(__dirname, '../game-content/search.html'));
 });
 
+app.get('/game-content/download.html/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../game-content/download.html'));
+});
+
+
 app.get('/add-to-cart/cart.html/', (req, res) => {
   res.sendFile(path.join(__dirname, '../add-to-cart/cart.html'));
 });
