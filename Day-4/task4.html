@@ -9,8 +9,9 @@
             document.getElementById('time').innerHTML = new Date().toTimeString()
         })
         function getTime(){
-            console.log(document.getElementById('timeinput').value);
-            t = document.getElementById('timeinput').value.split(':')
+            // console.log(document.getElementById('timeinput').value);
+            // t = document.getElementById('timeinput').value.split(':')
+            t = "13:00".split(':')
             console.log(t);
             
             currentTime = (new Date().getHours()*60)+new Date().getMinutes()
@@ -20,6 +21,10 @@
             console.log(t);
             
             remainingTime = (t-currentTime)
+
+            if (remainingTime < 0) {
+                remainingTime += 24 * 60;
+            }
 
             // console.log(remainingTime+" "+remainingTime/60);
             rhours =  Math.floor((remainingTime)/60)
@@ -36,9 +41,10 @@
 <body>
     <h1>Currrent time</h1>
     <h1 id="time"></h1>
+    <h3>Break time 1:00 PM</h3>
     <h1>Remainig time</h1>
     <h1 id="remainingTime"></h1>
-    <input type="time" name="" id="timeinput">
+    <!-- <input type="time" name="" id="timeinput"> -->
     <input type="submit" value="submit" onclick="getTime()">
 </body>
 </html>

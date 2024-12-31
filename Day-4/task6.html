@@ -4,6 +4,16 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <style>
+      img {
+         height: 100px;
+      }
+      td {
+         border: 1px solid black;
+         padding: 18px;
+         text-align: center;
+      }
+   </style>
 </head>
 <body>
    <h1>Task 6</h1>
@@ -12,40 +22,66 @@
       <br /><br>
       <input type="submit" value="Submit" />
    </form>
+   <div id="output"></div> <!-- Added output div -->
    <script>
       const myForm = document.getElementById("myForm");
       const csvFile = document.getElementById("csvFile");
+
       myForm.addEventListener("submit", function (e) {
          e.preventDefault();
          const input = csvFile.files[0];
          const reader = new FileReader();
          reader.onload = function (e) {
             const text = e.target.result;
-            
-            table = '<table>'
-            
-            value = text.split('\n')
 
-            for(let i =0 ; i<value.length-1 ; i++){
-               table+='<tr>'
-               console.log(i+" "+value[i]);
-               
-               table+= ('<td>'+`<image src='${value[i]}' alt='${i}'>`+'</td>')
-               table+= ('<td>'+`<a href='${value[i]}'>Download</a>`+'</td>')
-               table+='</tr>'
+            let table = '<table>';
+
+            const rows = text.split('\n');
+
+            for (let i = 0; i < rows.length - 1; i++) {
+               table += '<tr>';
+                  
+                //trim is needed else it is raising error while download of image 
+               const url = rows[i].trim();
+
+               table += `<td><img src="${url}" alt="Image ${i + 1}" /></td>`;
+               table += `<td><a href="${url}" download>Download</a></td>`;
+               table += `<td><button onclick="downloadImage('${url}', 'image_${i + 1}.png')">Download Image</button></td>`;
+               table += '</tr>';
             }
-            table+='</table>'
-            
-            // for(let i =0;)
 
-            document.write(table);
-            console.log(text.split('\n'));
-            
+            table += '</table>';
+
+            document.getElementById("output").innerHTML = table; // Updated rendering method
          };
-         console.log(input+" "+reader);
-         
+
          reader.readAsText(input);
       });
+
+      async function downloadImage(imageUrl, filename) {
+         try {
+            const response = await fetch(imageUrl);
+
+            if (!response.ok) {
+               alert("Failed to fetch the image.");
+               return;
+            }
+
+            const blob = await response.blob();
+            const blobUrl = URL.createObjectURL(blob);
+
+            const a = document.createElement("a");
+            a.href = blobUrl;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+
+            URL.revokeObjectURL(blobUrl);
+         } catch (error) {
+            alert("An error occurred: " + error.message);
+         }
+      }
    </script>
 </body>
 </html>
