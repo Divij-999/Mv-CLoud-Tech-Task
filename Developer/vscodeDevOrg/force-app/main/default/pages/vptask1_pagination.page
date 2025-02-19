@@ -1,0 +1,19 @@
+<apex:page docType="HTML-5.0" controller="vptask1_pagination">
+    <apex:pageBlock title="Contacts">
+        <apex:form id="theForm">
+            <div style="min-height:fit-content; height:500px;">
+                <apex:pageBlockSection >
+                    <apex:pageBlockTable value="{!contacts}" var="c">
+                        <apex:column value="{!c.Id}"/>
+                        <apex:column value="{!c.Name}"/>
+                    </apex:pageBlockTable>
+                </apex:pageBlockSection>
+            </div>
+            <apex:panelGrid columns="3">
+                <apex:commandButton action="{!previous}" value="Previous"/>
+                <apex:outputText >Page {!pageCount}</apex:outputText>
+                <apex:commandButton action="{!next}" value="Next"/>
+            </apex:panelGrid>
+        </apex:form>
+    </apex:pageBlock>
+</apex:page>

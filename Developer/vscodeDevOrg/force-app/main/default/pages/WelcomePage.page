@@ -1,0 +1,7 @@
+<apex:page docType="HTML-5.0">
+    <apex:pageBlock >
+    	<h1>
+            Welcome User
+        </h1>
+    </apex:pageBlock>
+</apex:page>

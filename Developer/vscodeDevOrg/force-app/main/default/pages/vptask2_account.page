@@ -1,0 +1,28 @@
+<apex:page docType="HTML-5.0" controller="vptask2_acount">
+    <apex:form>
+    	<apex:pageBlock title="Account">
+            <apex:selectList value="{!selectedType}" multiselect="false" size="1">
+                <apex:selectOptions value="{!AccountName}"/>
+                <apex:actionSupport event="onchange" reRender="theForm" />
+            </apex:selectList>
+        </apex:pageBlock>
+    </apex:form>
+    <apex:pageBlock title="Opportunity">
+        <apex:form id="theForm">
+            <div style="min-height:fit-content; height:500px;">
+                <apex:pageBlockSection >
+                    <apex:pageBlockTable value="{!Opportunity}" var="c">
+                        <apex:column value="{! c.Id}"/>
+                        <apex:column value="{!c.Name}"/>
+                        <apex:column value="{!c.AccountId}"/>
+                    </apex:pageBlockTable>
+                </apex:pageBlockSection>
+            </div>
+            <apex:panelGrid columns="3">
+                <apex:commandButton action="{!previous}" value="Previous"/>
+                <apex:outputText >Page {!pageCount}</apex:outputText>
+                <apex:commandButton action="{!next}" value="Next"/>
+            </apex:panelGrid>
+        </apex:form>
+    </apex:pageBlock>
+</apex:page>

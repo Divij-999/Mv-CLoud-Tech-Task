@@ -1,0 +1,29 @@
+<apex:page docType="HTML-5.0" controller="LoginForm">
+    <apex:pageBlock title="Login Form">
+        <apex:form style="padding:30px;">
+            <table cellpadding='10px' border='1px' cellspacing='0px' style='font-size:18px;'>
+                <tr>
+                	<td>
+            			<apex:outputLabel style="font-weight:bold;">Email : &nbsp;</apex:outputLabel> 
+                    </td>
+                    <td>
+                    	<apex:input type="text" id="email" value="{!email}"></apex:input>
+                    </td>
+                </tr>
+                <tr>
+                	<td>
+            			<apex:outputLabel style="font-weight:bold;">Password : &nbsp;</apex:outputLabel> 
+                    </td>
+                    <td>
+                    	<apex:input type="text" id="password" value="{!password}"></apex:input>
+                    </td>
+                </tr>
+                <tr align='center'>
+                    <td  colspan='2'>
+                        <apex:commandButton action="{!loginUser}" value="Submit"/>
+                    </td>
+                </tr>
+            </table>
+        </apex:form>
+    </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,15 @@
+<apex:page docType="HTML-5.0">
+    <apex:pageBlock >
+        <apex:form style="padding:30px;">
+            <apex:outputLabel style="font-weight:bold;">Full Name : &nbsp;</apex:outputLabel> 
+            <apex:input type="text" id="fullname"></apex:input>
+            <br/>
+            <apex:outputLabel style="font-weight:bold;">Email : &nbsp;</apex:outputLabel> 
+            <apex:input type="text" id="email"></apex:input>
+            <br/>
+            <apex:outputLabel style="font-weight:bold;">Password : &nbsp;</apex:outputLabel> 
+            <apex:input type="text" id="password"></apex:input>
+            <br/>
+        </apex:form>
+    </apex:pageBlock>
+</apex:page>

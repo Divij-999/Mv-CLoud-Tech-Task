@@ -1,0 +1,16 @@
+<apex:page docType="HTML-5.0" standardController="opportunity" extensions="future_apex_task_1">
+<!-- Begin Default Content REMOVE THIS -->
+<apex:pageBlock title="Image form">
+    <apex:form style="padding:30px;">
+        <h1>Enter Image Name</h1>
+        <br />
+        <apex:input type="text" id="name" value="{!nameField}"></apex:input>
+        <br />
+        <apex:commandButton action="{!mid}" value="Submit">
+            <!-- <apex:param name='opp' value='{!$CurrentPage.parameters.id}' assignTo="{!oppId}" /> -->
+        </apex:commandButton>
+
+    </apex:form>
+</apex:pageBlock>
+<!-- End Default Content REMOVE THIS -->
+</apex:page>
